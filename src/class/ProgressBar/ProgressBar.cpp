@@ -12,15 +12,15 @@ ProgressBar::ProgressBar (
     sf::Color foregroundColor
 ) {
 
-    setWidth(width);
-    setHeight(height);
-    setPadding(padding);
-    setPositionX(positionX);
-    setPositionY(positionY);
-    setOriginX(originX);
-    setOriginY(originY);
-    setBackgroundColor(backgroundColor);
-    setForegroundColor(foregroundColor);
+    setWidth(std::move(width));
+    setHeight(std::move(height));
+    setPadding(std::move(padding));
+    setPositionX(std::move(positionX));
+    setPositionY(std::move(positionY));
+    setOriginX(std::move(originX));
+    setOriginY(std::move(originY));
+    setBackgroundColor(std::move(backgroundColor));
+    setForegroundColor(std::move(foregroundColor));
 
 }
 
@@ -35,14 +35,14 @@ void ProgressBar::render () {
 
 void ProgressBar::setPosition (float x, float y) {
 
-    setPositionX(x);
-    setPositionY(y);
+    setPositionX(std::move(x));
+    setPositionY(std::move(y));
 
 }
 
 void ProgressBar::setPositionX (float x) {
 
-    m_positionX = x;
+    m_positionX = std::move(x);
 
     updatePositionX();
 
@@ -50,7 +50,7 @@ void ProgressBar::setPositionX (float x) {
 
 void ProgressBar::setPositionY (float y) {
 
-    m_positionY = y;
+    m_positionY = std::move(y);
 
     updatePositionY();
 
@@ -58,14 +58,14 @@ void ProgressBar::setPositionY (float y) {
 
 void ProgressBar::setOrigin (float x, float y) {
 
-    setOriginX(x);
-    setOriginY(y);
+    setOriginX(std::move(x));
+    setOriginY(std::move(y));
 
 }
 
 void ProgressBar::setOriginX (float x) {
 
-    m_originX = x;
+    m_originX = std::move(x);
 
     updateOriginX();
 
@@ -73,7 +73,7 @@ void ProgressBar::setOriginX (float x) {
 
 void ProgressBar::setOriginY (float y) {
 
-    m_originY = y;
+    m_originY = std::move(y);
 
     updateOriginY();
 
@@ -93,37 +93,37 @@ void ProgressBar::setOriginToTopLeft () {
 
 }
 
-double ProgressBar::getFill () {
+double ProgressBar::getFill () const {
 
     return m_fill;
 
 }
 
-float ProgressBar::getWidth () {
+float ProgressBar::getWidth () const {
 
     return m_width;
 
 }
 
-float ProgressBar::getHeight () {
+float ProgressBar::getHeight () const {
 
     return m_height;
 
 }
 
-float ProgressBar::getPadding () {
+float ProgressBar::getPadding () const {
 
     return m_padding;
 
 }
 
-sf::Color ProgressBar::getBackgroundColor () {
+sf::Color ProgressBar::getBackgroundColor () const {
 
     return m_backgroundColor;
 
 }
 
-sf::Color ProgressBar::getForegroundColor () {
+sf::Color ProgressBar::getForegroundColor () const {
 
     return m_foregroundColor;
 
@@ -137,7 +137,7 @@ void ProgressBar::setFill (double fill) {
         fill = 1.0;
     }
 
-    m_fill = fill;
+    m_fill = std::move(fill);
 
     updateFill();
 
@@ -146,7 +146,7 @@ void ProgressBar::setFill (double fill) {
 double ProgressBar::incrementFill (double fill) {
 
     fill += m_fill;
-    setFill(fill);
+    setFill(std::move(fill));
 
     return m_fill;
 
@@ -155,7 +155,7 @@ double ProgressBar::incrementFill (double fill) {
 double ProgressBar::decrementFill (double fill) {
 
     fill = m_fill - fill;
-    setFill(fill);
+    setFill(std::move(fill));
 
     return m_fill;
 
@@ -167,7 +167,7 @@ void ProgressBar::setWidth (float width) {
         width = 0.0;
     }
 
-    m_width = width;
+    m_width = std::move(width);
 
     updateWidth();
 
@@ -179,7 +179,7 @@ void ProgressBar::setHeight (float height) {
         height = 0.0;
     }
 
-    m_height = height;
+    m_height = std::move(height);
 
     updateHeight();
 
@@ -187,7 +187,7 @@ void ProgressBar::setHeight (float height) {
 
 void ProgressBar::setPadding (float padding) {
 
-    m_padding = padding;
+    m_padding = std::move(padding);
 
     updatePadding();
 
@@ -195,7 +195,7 @@ void ProgressBar::setPadding (float padding) {
 
 void ProgressBar::setBackgroundColor (sf::Color color) {
 
-    m_backgroundColor = color;
+    m_backgroundColor = std::move(color);
 
     updateBackgroundColor();
 
@@ -203,7 +203,7 @@ void ProgressBar::setBackgroundColor (sf::Color color) {
 
 void ProgressBar::setForegroundColor (sf::Color color) {
 
-    m_foregroundColor = color;
+    m_foregroundColor = std::move(color);
 
     updateForegroundColor();
 

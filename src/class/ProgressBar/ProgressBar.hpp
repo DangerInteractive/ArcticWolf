@@ -32,12 +32,12 @@ public:
     void setOriginToCenter ();
     void setOriginToTopLeft ();
 
-    double getFill ();
-    float getWidth ();
-    float getHeight ();
-    float getPadding ();
-    sf::Color getBackgroundColor ();
-    sf::Color getForegroundColor ();
+    double getFill () const;
+    float getWidth () const;
+    float getHeight () const;
+    float getPadding () const;
+    sf::Color getBackgroundColor () const;
+    sf::Color getForegroundColor () const;
 
     void setFill (double);
     double incrementFill (double);
