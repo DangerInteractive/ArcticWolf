@@ -44,3 +44,27 @@ void LoopKeybinding::process (const std::vector<sf::Keyboard::Key>& keys) {
     }
 
 }
+
+const LoopKeybinding::LoopKeybindingCallback& LoopKeybinding::getCallback () const {
+
+    return m_callback;
+
+}
+
+std::vector<sf::Keyboard::Key> LoopKeybinding::getKeys () const {
+
+    return m_keys;
+
+}
+
+void LoopKeybinding::setCallback (LoopKeybindingCallback callback) {
+
+    m_callback = std::move(callback);
+
+}
+
+void LoopKeybinding::setKeys (std::vector<sf::Keyboard::Key> keys) {
+
+    m_keys = std::move(keys);
+
+}
