@@ -1,16 +1,28 @@
 #include "GameLoop.hpp"
 
-void GameLoop::setRenderFrameRate (int framesPerSecond) {
+unsigned int GameLoop::getRenderFrameRate () {
 
-    m_renderFrameRate = framesPerSecond;
-    m_renderSeconds = 1.0 / framesPerSecond;
+    return m_renderFrameRate;
 
 }
 
-void GameLoop::setUpdateTickRate (int ticksPerSecond) {
+unsigned int GameLoop::getUpdateTickRate () {
 
-    m_updateTickRate = ticksPerSecond;
+    return m_updateTickRate;
+
+}
+
+void GameLoop::setRenderFrameRate (unsigned int framesPerSecond) {
+
+    m_renderSeconds = 1.0 / framesPerSecond;
+    m_renderFrameRate = std::move(framesPerSecond);
+
+}
+
+void GameLoop::setUpdateTickRate (unsigned int ticksPerSecond) {
+
     m_updateSeconds = 1.0 / ticksPerSecond;
+    m_updateTickRate = std::move(ticksPerSecond);
 
 }
 
@@ -180,13 +192,13 @@ bool GameLoop::isRunning () {
 
 void GameLoop::render (double deltaTime) {
 
-    GameStateManager::render(deltaTime);
+    GameStateManager::render(std::move(deltaTime));
 
 }
 
 void GameLoop::update (
     sf::Clock& updateLoopClock,
-    int& updateTickRate,
+    unsigned int& updateTickRate,
     double& updateSeconds,
     bool& windowOpen,
     bool& isRunning,
@@ -224,8 +236,8 @@ void GameLoop::update (
 
 }
 
-int GameLoop::m_renderFrameRate = 60;
-int GameLoop::m_updateTickRate = 40;
+unsigned int GameLoop::m_renderFrameRate = 60;
+unsigned int GameLoop::m_updateTickRate = 40;
 
 double GameLoop::m_renderSeconds = 1.0 / 60.0;
 double GameLoop::m_updateSeconds = 1.0 / 40.0;

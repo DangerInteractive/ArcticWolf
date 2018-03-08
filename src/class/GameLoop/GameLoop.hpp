@@ -13,8 +13,20 @@ class GameLoop {
 
 public:
 
-    static void setRenderFrameRate (int);
-    static void setUpdateTickRate (int);
+    GameLoop () = delete;
+    ~GameLoop () = delete;
+
+    GameLoop (GameLoop&&) = delete;
+    GameLoop& operator = (GameLoop&&) = delete;
+
+    GameLoop (const GameLoop&) = delete;
+    GameLoop& operator = (const GameLoop&) = delete;
+
+    static unsigned int getRenderFrameRate ();
+    static unsigned int getUpdateTickRate ();
+
+    static void setRenderFrameRate (unsigned int);
+    static void setUpdateTickRate (unsigned int);
 
     static void run ();
     static void freeze ();
@@ -22,14 +34,12 @@ public:
 
 private:
 
-    GameLoop () = delete;
-
-    static void update (sf::Clock&, int&, double&, bool&, bool&, bool&);
+    static void update (sf::Clock&, unsigned int&, double&, bool&, bool&, bool&);
 
     static void render (double);
 
-    static int m_renderFrameRate;
-    static int m_updateTickRate;
+    static unsigned int m_renderFrameRate;
+    static unsigned int m_updateTickRate;
 
     static double m_renderSeconds;
     static double m_updateSeconds;
