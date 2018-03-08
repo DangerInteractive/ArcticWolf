@@ -17,10 +17,20 @@ class GameStateManager {
 
 public:
 
+    GameStateManager () = delete; // static only
+    ~GameStateManager () = delete;
+
+    GameStateManager (GameStateManager&&) = delete;
+    GameStateManager& operator = (GameStateManager&&) = delete;
+
+    GameStateManager (const GameStateManager&) = delete;
+    GameStateManager& operator = (const GameStateManager&) = delete;
+
+    static void pushState (std::shared_ptr<GameState>);
     static void pushState (GameState*);
     static bool pushState (std::string);
     static void dropState ();
-    static GameState* popState ();
+    static std::shared_ptr<GameState> popState ();
 
     static void refreshLiveStates ();
 
@@ -46,13 +56,11 @@ public:
 
 private:
 
-    GameStateManager () = delete;
+    static std::vector<std::shared_ptr<GameState>> m_states;
 
-    static std::vector<GameState*> m_states;
-
-    static std::vector<GameState*> m_statesLiveRender;
-    static std::vector<GameState*> m_statesLiveUpdate;
-    static std::vector<GameState*> m_statesLiveInput;
+    static std::vector<std::shared_ptr<GameState>> m_statesLiveRender;
+    static std::vector<std::shared_ptr<GameState>> m_statesLiveUpdate;
+    static std::vector<std::shared_ptr<GameState>> m_statesLiveInput;
 
 };
 

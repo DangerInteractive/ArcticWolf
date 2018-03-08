@@ -1,13 +1,13 @@
 #include "GameStateManager.hpp"
 
-void GameStateManager::pushState (GameState* state) {
+void GameStateManager::pushState (std::shared_ptr<GameState> state) {
 
     m_states.push_back(state);
     state->onPush();
     state->onActivate();
 
     if (m_states.size() > 1) {
-        GameState* prev = m_states[m_states.size() - 2];
+        std::shared_ptr<GameState> prev = m_states[m_states.size() - 2];
         prev->onDeactivate();
         for (int i = m_states.size() - 2; i >= 0; --i) {
             m_states[i]->onDescend();
@@ -18,13 +18,20 @@ void GameStateManager::pushState (GameState* state) {
 
 }
 
+void GameStateManager::pushState (GameState* state) {
+
+    std::shared_ptr<GameState> ptrState(state);
+    pushState(ptrState);
+
+}
+
 bool GameStateManager::pushState (std::string key) {
 
     if (!GameStateStore::stateExists(key)) {
         return false;
     }
 
-    GameState* state = GameStateStore::getState(key);
+    auto state = GameStateStore::getState(key);
     pushState(state);
 
     return true;
@@ -33,13 +40,13 @@ bool GameStateManager::pushState (std::string key) {
 
 void GameStateManager::dropState () {
 
-    GameState* top = m_states[m_states.size() - 1];
+    auto top = m_states[m_states.size() - 1];
     top->onDeactivate();
     top->onPop();
-    delete top;
+    top.reset();
 
     if (m_states.size() > 0) {
-        GameState* top = m_states[m_states.size() - 1];
+        auto top = m_states[m_states.size() - 1];
         top->onActivate();
         for (int i = m_states.size() - 1; i >= 0; --i) {
             m_states[i]->onAscend();
@@ -50,14 +57,14 @@ void GameStateManager::dropState () {
 
 }
 
-GameState* GameStateManager::popState () {
+std::shared_ptr<GameState> GameStateManager::popState () {
 
-    GameState* top = m_states[m_states.size() - 1];
+    auto top = m_states[m_states.size() - 1];
     top->onDeactivate();
     top->onPop();
 
     if (m_states.size() > 0) {
-        GameState* newTop = m_states[m_states.size() - 1];
+        auto newTop = m_states[m_states.size() - 1];
         newTop->onActivate();
         for (int i = m_states.size() - 1; i >= 0; --i) {
             m_states[i]->onAscend();
@@ -72,11 +79,11 @@ GameState* GameStateManager::popState () {
 
 void GameStateManager::refreshLiveStates () {
 
-    std::vector<GameState*> liveRenderStates;
-    std::vector<GameState*> liveUpdateStates;
-    std::vector<GameState*> liveInputStates;
+    std::vector<std::shared_ptr<GameState>> liveRenderStates;
+    std::vector<std::shared_ptr<GameState>> liveUpdateStates;
+    std::vector<std::shared_ptr<GameState>> liveInputStates;
 
-    GameState* top = m_states[m_states.size() - 1];
+    auto top = m_states[m_states.size() - 1];
     liveRenderStates.push_back(top);
     liveUpdateStates.push_back(top);
     liveInputStates.push_back(top);
@@ -90,14 +97,14 @@ void GameStateManager::refreshLiveStates () {
         )
     ) {
 
-        GameState* prev = top;
+        auto prev = top;
         bool renderBroken = !prev->transparentRender;
         bool updateBroken = !prev->transparentUpdate;
         bool inputBroken = !prev->transparentInput;
 
         for (int i = m_states.size() - 2; i >= 0; --i) {
 
-            GameState* cur = m_states[i];
+            std::shared_ptr<GameState> cur = m_states[i];
 
             if (renderBroken && updateBroken && inputBroken) {
                 break;
@@ -144,7 +151,7 @@ void GameStateManager::clearWindow () {
 void GameStateManager::render (double deltaTime) {
 
     for (int i = 0; i < m_statesLiveRender.size(); ++i) {
-        m_statesLiveRender[i]->render(deltaTime);
+        m_statesLiveRender[i]->render(std::move(deltaTime));
     }
 
 }
@@ -261,8 +268,8 @@ void GameStateManager::resizeCallback (int width, int height) {
 
 }
 
-std::vector<GameState*> GameStateManager::m_states;
+std::vector<std::shared_ptr<GameState>> GameStateManager::m_states;
 
-std::vector<GameState*> GameStateManager::m_statesLiveRender;
-std::vector<GameState*> GameStateManager::m_statesLiveUpdate;
-std::vector<GameState*> GameStateManager::m_statesLiveInput;
+std::vector<std::shared_ptr<GameState>> GameStateManager::m_statesLiveRender;
+std::vector<std::shared_ptr<GameState>> GameStateManager::m_statesLiveUpdate;
+std::vector<std::shared_ptr<GameState>> GameStateManager::m_statesLiveInput;
