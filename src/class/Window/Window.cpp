@@ -2,25 +2,27 @@
 
 sf::RenderWindow* Window::getContext () {
 
-    return m_context;
+    return m_context.get();
 
 }
 
 bool Window::exists () {
 
-    return m_context != nullptr;
+    if (m_context) {
+        return true;
+    }
+
+    return false;
 
 }
 
 bool Window::isOpen () {
 
-    if (!Window::exists()) {
-        return false;
-    }
-
-    if (m_context->isOpen()) {
+    if (Window::exists() && m_context->isOpen()) {
         return true;
     }
+
+    return false;
 
 }
 
@@ -31,11 +33,11 @@ void Window::open () {
         return;
     }
 
-    m_context = new sf::RenderWindow(
+    m_context = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(
         sf::VideoMode(m_width, m_height),
         m_title,
         sf::Style::Close | sf::Style::Resize | sf::Style::Titlebar
-    );
+    ));
 
     if (!m_context) {
         Log::error("Failed to create a window.");
@@ -55,7 +57,7 @@ void Window::close () {
     Log::verbose("Closing window.");
     m_context->close();
     if (m_context) {
-        delete m_context;
+        m_context.reset();
     }
 
 }
@@ -88,13 +90,13 @@ void Window::clear () {
 
 }
 
-void Window::clear (const sf::Color color) {
+void Window::clear (sf::Color color) {
 
     if (!Window::exists()) {
         Log::warning("Cannot clear window because it is not open.");
     }
 
-    m_context->clear(color);
+    m_context->clear(std::move(color));
 
 }
 
@@ -116,30 +118,30 @@ int Window::getHeight () {
 
 }
 
-void Window::setWidth (const int width) {
+void Window::setWidth (int width) {
 
     std::unique_lock<std::mutex> lock_size(mutex_size);
 
-    m_width = width;
+    m_width = std::move(width);
     pushWindowSize();
 
 }
 
-void Window::setHeight (const int height) {
+void Window::setHeight (int height) {
 
     std::unique_lock<std::mutex> lock_size(mutex_size);
 
-    m_height = height;
+    m_height = std::move(height);
     pushWindowSize();
 
 }
 
-void Window::setSize (const int width, const int height) {
+void Window::setSize (int width, int height) {
 
     std::unique_lock<std::mutex> lock_size(mutex_size);
 
-    m_width = width;
-    m_height = height;
+    m_width = std::move(width);
+    m_height = std::move(height);
     pushWindowSize();
 
 }
@@ -150,11 +152,11 @@ std::string Window::getTitle () {
 
 }
 
-void Window::setTitle (const std::string title) {
+void Window::setTitle (std::string title) {
 
     std::unique_lock<std::mutex> lock_title(mutex_title);
 
-    m_title = title;
+    m_title = std::move(title);
     pushWindowTitle();
 
 }
@@ -175,7 +177,7 @@ void Window::pushWindowTitle () {
 
 }
 
-sf::RenderWindow* Window::m_context = nullptr;
+std::unique_ptr<sf::RenderWindow> Window::m_context;
 
 int Window::m_width = 800;
 int Window::m_height = 600;
