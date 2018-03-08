@@ -3,7 +3,7 @@
 Button::Button (
     ButtonCallback& callback,
     Controller& controller,
-    sf::Font* font,
+    std::shared_ptr<sf::Font> font,
     std::string text,
     float fontSize,
     float padding,
@@ -11,17 +11,17 @@ Button::Button (
     sf::Color foregroundColor,
     Button::Alignment alignment
 ) :
-  m_controller(&controller)
+  m_controller(controller)
 {
 
     setCallback(callback);
-    setFont(font);
-    setText(text);
-    setFontSize(fontSize);
-    setPadding(padding);
-    setBackgroundColor(backgroundColor);
-    setForegroundColor(foregroundColor);
-    setAlignment(alignment);
+    setFont(std::move(font));
+    setText(std::move(text));
+    setFontSize(std::move(fontSize));
+    setPadding(std::move(padding));
+    setBackgroundColor(std::move(backgroundColor));
+    setForegroundColor(std::move(foregroundColor));
+    setAlignment(std::move(alignment));
 
     controller.addMouseButtonPressCallback(
         [this](int button, int x, int y){this->onClick(button, x, y);}
@@ -42,17 +42,17 @@ Button::Button (
     sf::Color foregroundColor,
     Button::Alignment alignment
 ) :
-  m_controller(&controller)
+  m_controller(controller)
 {
 
     setCallback(callback);
     setFont(AssetStore::getFont(font));
-    setText(text);
-    setFontSize(fontSize);
-    setPadding(padding);
-    setBackgroundColor(backgroundColor);
-    setForegroundColor(foregroundColor);
-    setAlignment(alignment);
+    setText(std::move(text));
+    setFontSize(std::move(fontSize));
+    setPadding(std::move(padding));
+    setBackgroundColor(std::move(backgroundColor));
+    setForegroundColor(std::move(foregroundColor));
+    setAlignment(std::move(alignment));
 
     controller.addMouseButtonPressCallback(
         [this](int button, int x, int y){this->onClick(button, x, y);}
@@ -61,8 +61,6 @@ Button::Button (
     m_borderElement.setOutlineThickness(2.0);
 
 }
-
-Button::~Button () {}
 
 void Button::render () {
 
@@ -142,14 +140,14 @@ void Button::onClick (int button, int x, int y) {
 
 void Button::setPosition (float x, float y) {
 
-    setPositionX(x);
-    setPositionY(y);
+    setPositionX(std::move(x));
+    setPositionY(std::move(y));
 
 }
 
 void Button::setPositionX (float x) {
 
-    m_positionX = x;
+    m_positionX = std::move(x);
 
     updatePositionX();
 
@@ -157,7 +155,7 @@ void Button::setPositionX (float x) {
 
 void Button::setPositionY (float y) {
 
-    m_positionY = y;
+    m_positionY = std::move(y);
 
     updatePositionY();
 
@@ -165,37 +163,37 @@ void Button::setPositionY (float y) {
 
 void Button::setAlignment (Button::Alignment alignment) {
 
-    m_alignment = alignment;
+    m_alignment = std::move(alignment);
 
     updateAlignment();
 
 }
 
-Button::ButtonCallback& Button::getCallback () {
+const Button::ButtonCallback& Button::getCallback () const {
 
     return m_callback;
 
 }
 
-sf::Font* Button::getFont () {
+std::shared_ptr<sf::Font> Button::getFont () const {
 
     return m_font;
 
 }
 
-std::string Button::getText () {
+std::string Button::getText () const {
 
     return m_text;
 
 }
 
-sf::Color Button::getBackgroundColor () {
+sf::Color Button::getBackgroundColor () const {
 
     return m_backgroundColor;
 
 }
 
-sf::Color Button::getForegroundColor () {
+sf::Color Button::getForegroundColor () const {
 
     return m_foregroundColor;
 
@@ -207,9 +205,9 @@ void Button::setCallback (Button::ButtonCallback& callback) {
 
 }
 
-void Button::setFont (sf::Font* font) {
+void Button::setFont (std::shared_ptr<sf::Font> font) {
 
-    m_font = font;
+    m_font = std::move(font);
 
     updateFont();
 
@@ -217,7 +215,7 @@ void Button::setFont (sf::Font* font) {
 
 void Button::setText (std::string text) {
 
-    m_text = text;
+    m_text = std::move(text);
 
     updateText();
 
@@ -229,7 +227,7 @@ void Button::setFontSize (float size) {
         size = 0.0;
     }
 
-    m_fontSize = size;
+    m_fontSize = std::move(size);
 
     updateFontSize();
 
@@ -241,7 +239,7 @@ void Button::setPadding (float padding) {
         padding = 0.0;
     }
 
-    m_padding = padding;
+    m_padding = std::move(padding);
 
     updatePadding();
 
@@ -249,7 +247,7 @@ void Button::setPadding (float padding) {
 
 void Button::setBackgroundColor (sf::Color color) {
 
-    m_backgroundColor = color;
+    m_backgroundColor = std::move(color);
 
     updateBackgroundColor();
 
@@ -257,7 +255,7 @@ void Button::setBackgroundColor (sf::Color color) {
 
 void Button::setForegroundColor (sf::Color color) {
 
-    m_foregroundColor = color;
+    m_foregroundColor = std::move(color);
 
     updateBackgroundColor();
 

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <functional>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include "../AssetStore/AssetStore.hpp"
 #include "../Window/Window.hpp"
@@ -24,12 +25,12 @@ public:
         BottomRight
     };
 
-    typedef std::function < void () > ButtonCallback;
+    typedef std::function<void()> ButtonCallback;
 
     Button (
         ButtonCallback&,
         Controller&,
-        sf::Font*,
+        std::shared_ptr<sf::Font>,
         std::string,
         float fontSize = 32.0,
         float padding = 10.0,
@@ -48,7 +49,13 @@ public:
         sf::Color foregroundColor = sf::Color(0, 0, 0, 255),
         Button::Alignment alignment = Button::Alignment::Center
     );
-    ~Button ();
+    ~Button () = default;
+
+    Button (Button&&) = default;
+    Button& operator = (Button&&) = default;
+
+    Button (const Button&) = default;
+    Button& operator = (const Button&) = default;
 
     void render ();
     void onPress ();
@@ -59,14 +66,14 @@ public:
     void setPositionY (float);
     void setAlignment (Button::Alignment);
 
-    ButtonCallback& getCallback ();
-    sf::Font* getFont ();
-    std::string getText ();
-    sf::Color getBackgroundColor ();
-    sf::Color getForegroundColor ();
+    const ButtonCallback& getCallback () const;
+    std::shared_ptr<sf::Font> getFont () const;
+    std::string getText () const;
+    sf::Color getBackgroundColor () const;
+    sf::Color getForegroundColor () const;
 
     void setCallback (ButtonCallback&);
-    void setFont (sf::Font*);
+    void setFont (std::shared_ptr<sf::Font>);
     void setText (std::string);
     void setFontSize (float);
     void setPadding (float);
@@ -87,8 +94,8 @@ private:
     void updateForegroundColor ();
 
     ButtonCallback m_callback;
-    Controller* m_controller;
-    sf::Font* m_font;
+    Controller& m_controller;
+    std::shared_ptr<sf::Font> m_font;
     std::string m_text;
     float m_fontSize = 32.0;
     float m_padding = 10.0;
