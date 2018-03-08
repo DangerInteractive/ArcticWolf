@@ -15,21 +15,27 @@ public:
     static const bool transparentInput = false;
 
     // constructor and destructor
-    GameState () {};
-    virtual ~GameState () {};
+    GameState ();
+    virtual ~GameState () = default;
+
+    GameState (GameState&&) = delete;
+    GameState& operator = (GameState&&) = delete;
+
+    GameState (const GameState&) = delete;
+    GameState& operator = (const GameState&) = delete;
 
     // state management event callbacks
-    virtual void onActivate () {}
-    virtual void onDeactivate () {}
-    virtual void onPush () {}
-    virtual void onPop () {}
-    virtual void onAscend () {}
-    virtual void onDescend () {}
+    virtual void onActivate () = 0;
+    virtual void onDeactivate () = 0;
+    virtual void onPush () = 0;
+    virtual void onPop () = 0;
+    virtual void onAscend () = 0;
+    virtual void onDescend () = 0;
 
     // game loop callbacks
     void clearWindow ();
-    virtual void render (double) {}
-    virtual void update () {}
+    virtual void render (double) = 0;
+    virtual void update () = 0;
 
     // input handling
     Controller& getController ();

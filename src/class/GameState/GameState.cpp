@@ -1,5 +1,7 @@
 #include "GameState.hpp"
 
+GameState::GameState () {}
+
 void GameState::clearWindow () {
 
     if (m_clearWindow) {
