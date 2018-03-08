@@ -10,7 +10,7 @@ bool AssetStore::imageExists (std::string key) {
 
 }
 
-sf::Image* AssetStore::getImage (std::string key) {
+std::shared_ptr<sf::Image> AssetStore::getImage (std::string key) {
 
     if (!imageExists(key)) {
         return nullptr;
@@ -30,7 +30,7 @@ bool AssetStore::soundExists (std::string key) {
 
 }
 
-sf::Sound* AssetStore::getSound (std::string key) {
+std::shared_ptr<sf::Sound> AssetStore::getSound (std::string key) {
 
     if (!soundExists(key)) {
         return nullptr;
@@ -50,7 +50,7 @@ bool AssetStore::fontExists (std::string key) {
 
 }
 
-sf::Font* AssetStore::getFont (std::string key) {
+std::shared_ptr<sf::Font> AssetStore::getFont (std::string key) {
 
     if (!fontExists(key)) {
         return nullptr;
@@ -66,7 +66,7 @@ bool AssetStore::registerImage (std::string key, sf::Image* image) {
         return false;
     }
 
-    m_images.insert(std::pair<std::string, sf::Image*>(key, image));
+    m_images.insert(std::pair<std::string, std::shared_ptr<sf::Image>>(std::move(key), image));
     return true;
 
 }
@@ -77,7 +77,7 @@ void AssetStore::deleteImage (std::string key) {
         return;
     }
 
-    delete m_images[key];
+    m_images[key].reset();
     m_images.erase(key);
 
 }
@@ -88,7 +88,7 @@ bool AssetStore::registerSound (std::string key, sf::Sound* sound) {
         return false;
     }
 
-    m_sounds.insert(std::pair<std::string, sf::Sound*>(key, sound));
+    m_sounds.insert(std::pair<std::string, std::shared_ptr<sf::Sound>>(std::move(key), sound));
     return true;
 
 }
@@ -99,7 +99,7 @@ void AssetStore::deleteSound (std::string key) {
         return;
     }
 
-    delete m_sounds[key];
+    m_sounds[key].reset();
     m_sounds.erase(key);
 
 }
@@ -110,7 +110,7 @@ bool AssetStore::registerFont (std::string key, sf::Font* font) {
         return false;
     }
 
-    m_fonts.insert(std::pair<std::string, sf::Font*>(key, font));
+    m_fonts.insert(std::pair<std::string, std::shared_ptr<sf::Font>>(std::move(key), font));
     return true;
 
 }
@@ -121,11 +121,11 @@ void AssetStore::deleteFont (std::string key) {
         return;
     }
 
-    delete m_fonts[key];
+    m_fonts[key].reset();
     m_fonts.erase(key);
 
 }
 
-std::map<std::string, sf::Image*> AssetStore::m_images;
-std::map<std::string, sf::Sound*> AssetStore::m_sounds;
-std::map<std::string, sf::Font*> AssetStore::m_fonts;
+std::map<std::string, std::shared_ptr<sf::Image>> AssetStore::m_images;
+std::map<std::string, std::shared_ptr<sf::Sound>> AssetStore::m_sounds;
+std::map<std::string, std::shared_ptr<sf::Font>> AssetStore::m_fonts;
