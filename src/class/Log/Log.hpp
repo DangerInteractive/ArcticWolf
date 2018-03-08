@@ -17,15 +17,24 @@ class Log {
 
 public:
 
+    Log () = delete; // static only
+    ~Log () = delete;
+
+    Log (Log&&) = delete;
+    Log& operator = (Log&&) = delete;
+
+    Log (const Log&) = delete;
+    Log& operator = (const Log&) = delete;
+
     static LogLevel getFilterLevel ();
-    static void setFilterLevel (const LogLevel);
+    static void setFilterLevel (LogLevel);
 
-    static void log (const std::string, const LogLevel = LogLevel::VERBOSE);
+    static void log (std::string, LogLevel = LogLevel::VERBOSE);
 
-    static void verbose (const std::string);
-    static void notice  (const std::string);
-    static void warning (const std::string);
-    static void error   (const std::string);
+    static void verbose (std::string);
+    static void notice  (std::string);
+    static void warning (std::string);
+    static void error   (std::string);
 
     static void bindCallbacks ();
 
@@ -33,9 +42,7 @@ public:
 
 private:
 
-    Log () = delete; // static only class
-
-    static std::string formatMessage (const std::string, const LogLevel = LogLevel::VERBOSE);
+    static std::string formatMessage (std::string, LogLevel = LogLevel::VERBOSE);
 
     static LogLevel m_filterLevel;
 

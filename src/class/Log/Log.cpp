@@ -6,17 +6,17 @@ LogLevel Log::getFilterLevel () {
 
 }
 
-void Log::setFilterLevel (const LogLevel filterLevel) {
+void Log::setFilterLevel (LogLevel filterLevel) {
 
-    m_filterLevel = filterLevel;
+    m_filterLevel = std::move(filterLevel);
 
 }
 
-void Log::log (const std::string message, const LogLevel messageType) {
+void Log::log (std::string message, LogLevel messageType) {
 
     if (messageType == LogLevel::UNDEFINED || messageType >= m_filterLevel) {
 
-        std::string out = Log::formatMessage(message, messageType);
+        std::string out = Log::formatMessage(std::move(message), messageType);
 
         if (messageType == LogLevel::ERROR) {
             std::unique_lock<std::mutex> lock_stderr(Log::mutex_stderr);
@@ -30,27 +30,27 @@ void Log::log (const std::string message, const LogLevel messageType) {
 
 }
 
-void Log::verbose (const std::string message) {
+void Log::verbose (std::string message) {
 
-    Log::log(message, LogLevel::VERBOSE);
-
-}
-
-void Log::notice (const std::string message) {
-
-    Log::log(message, LogLevel::NOTICE);
+    Log::log(std::move(message), LogLevel::VERBOSE);
 
 }
 
-void Log::warning (const std::string message) {
+void Log::notice (std::string message) {
 
-    Log::log(message, LogLevel::WARNING);
+    Log::log(std::move(message), LogLevel::NOTICE);
 
 }
 
-void Log::error (const std::string message) {
+void Log::warning (std::string message) {
 
-    Log::log(message, LogLevel::ERROR);
+    Log::log(std::move(message), LogLevel::WARNING);
+
+}
+
+void Log::error (std::string message) {
+
+    Log::log(std::move(message), LogLevel::ERROR);
 
 }
 
@@ -67,7 +67,7 @@ void Log::unhandledException () {
 
 }
 
-std::string Log::formatMessage (const std::string message, LogLevel messageType) {
+std::string Log::formatMessage (std::string message, LogLevel messageType) {
 
     auto time = std::time(nullptr);
     auto localtime = *std::localtime(&time);
@@ -100,7 +100,7 @@ std::string Log::formatMessage (const std::string message, LogLevel messageType)
 
     }
 
-    oss << message;
+    oss << std::move(message);
 
     return oss.str();
 
