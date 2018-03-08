@@ -12,19 +12,26 @@ class Controller {
 
 public:
 
-    typedef std::function < void (sf::Uint32) > TextCallback;
-    typedef std::function < void (double, double) > CursorCallback;
-    typedef std::function < void () > CursorInCallback;
-    typedef std::function < void () > CursorOutCallback;
-    typedef std::function < void () > FocusCallback;
-    typedef std::function < void () > UnfocusCallback;
-    typedef std::function < void (int, int, int) > MouseButtonPressCallback;
-    typedef std::function < void (int, int, int) > MouseButtonReleaseCallback;
-    typedef std::function < void (int, int, int) > LoopMouseButtonCallback;
-    typedef std::function < void (double) > ScrollCallback;
-    typedef std::function < void (int, int) > ResizeCallback;
+    typedef std::function<void(sf::Uint32)> TextCallback;
+    typedef std::function<void(double,double)> CursorCallback;
+    typedef std::function<void()> CursorInCallback;
+    typedef std::function<void()> CursorOutCallback;
+    typedef std::function<void()> FocusCallback;
+    typedef std::function<void()> UnfocusCallback;
+    typedef std::function<void(int,int,int)> MouseButtonPressCallback;
+    typedef std::function<void(int,int,int)> MouseButtonReleaseCallback;
+    typedef std::function<void(int,int,int)> LoopMouseButtonCallback;
+    typedef std::function<void(double)> ScrollCallback;
+    typedef std::function<void(int,int)> ResizeCallback;
 
     Controller ();
+    ~Controller () = default;
+
+    Controller (Controller&&) = default;
+    Controller& operator = (Controller&&) = default;
+
+    Controller (const Controller&) = default;
+    Controller& operator = (const Controller&) = default;
 
     void loopCheck ();
 
@@ -43,8 +50,8 @@ public:
     void onScroll (double);
     void onResize (int, int);
 
-    std::vector<Keybinding> getKeybindings ();
-    std::vector<LoopKeybinding> getLoopKeybindings ();
+    std::vector<Keybinding> getKeybindings () const;
+    std::vector<LoopKeybinding> getLoopKeybindings () const;
 
     void setKeybindings (std::vector<Keybinding>);
     void addKeybinding (Keybinding);
