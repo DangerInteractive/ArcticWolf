@@ -8,7 +8,7 @@ LogLevel Log::getFilterLevel () {
 
 void Log::setFilterLevel (LogLevel filterLevel) {
 
-    m_filterLevel = std::move(filterLevel);
+    m_filterLevel = filterLevel;
 
 }
 
@@ -25,7 +25,7 @@ void Log::unhandledException () {
 
 }
 
-std::string formatMessage (LogLevel messageType, const std::string& message) {
+std::string Log::formatMessage (LogLevel messageType, const std::string& message) {
 
     auto time = std::time(nullptr);
     auto localtime = *std::localtime(&time);

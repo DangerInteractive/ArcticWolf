@@ -80,10 +80,16 @@ private:
 
         std::ostringstream oss;
         oss << messageLeft;
+        oss << concatMessage(messageRight...);
 
-        if (sizeof...(messageRight) > 0) {
-            oss << concatMessage(messageRight...);
-        }
+        return oss.str();
+
+    }
+    template<typename T>
+    static std::string concatMessage (T&& message) {
+
+        std::ostringstream oss;
+        oss << message;
 
         return oss.str();
 
