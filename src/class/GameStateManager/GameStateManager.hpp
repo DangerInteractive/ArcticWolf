@@ -26,6 +26,12 @@ public:
     GameStateManager (const GameStateManager&) = delete;
     GameStateManager& operator = (const GameStateManager&) = delete;
 
+    template<typename TState, typename ...TArg>
+    static std::shared_ptr<GameState> pushNewState (TArg&&... args) {
+        auto state = std::make_shared<TState>(std::forward<TArg>(args)...);
+        pushState(state);
+        return state;
+    }
     static void pushState (std::shared_ptr<GameState>);
     static void pushState (GameState*);
     static bool pushState (std::string);
