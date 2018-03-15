@@ -1,2 +1,2 @@
 # ArcticWolf
-A cross-platform game engine based on C++, OpenGL and SFML.
+A cross-platform 2D-focused game engine based on C++, OpenGL and SFML.
