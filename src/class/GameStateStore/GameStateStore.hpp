@@ -34,7 +34,7 @@ public:
         }
     }
     static bool registerState (const std::string&, GameState*);
-    static bool registerState (const std::string&, std::shared_ptr<GameState>);
+    static bool registerState (const std::string&, const std::shared_ptr<GameState>&);
     static void deleteState (const std::string&);
 
 private:
