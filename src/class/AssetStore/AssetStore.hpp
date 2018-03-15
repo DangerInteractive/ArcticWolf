@@ -34,7 +34,7 @@ public:
         }
     }
     static bool registerImage (const std::string&, sf::Image*);
-    static bool registerImage (const std::string&, std::shared_ptr<sf::Image>);
+    static bool registerImage (const std::string&, const std::shared_ptr<sf::Image>&);
     static void deleteImage (const std::string&);
 
     // sound getters
@@ -51,7 +51,7 @@ public:
         }
     }
     static bool registerSound (const std::string&, sf::Sound*);
-    static bool registerSound (const std::string&, std::shared_ptr<sf::Sound>);
+    static bool registerSound (const std::string&, const std::shared_ptr<sf::Sound>&);
     static void deleteSound (const std::string&);
 
     // font getters
@@ -68,7 +68,7 @@ public:
         }
     }
     static bool registerFont (const std::string&, sf::Font*);
-    static bool registerFont (const std::string&, std::shared_ptr<sf::Font>);
+    static bool registerFont (const std::string&, const std::shared_ptr<sf::Font>&);
     static void deleteFont (const std::string&);
 
 private:
