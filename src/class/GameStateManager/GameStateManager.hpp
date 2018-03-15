@@ -32,9 +32,9 @@ public:
         pushState(state);
         return state;
     }
-    static void pushState (std::shared_ptr<GameState>);
+    static void pushState (const std::shared_ptr<GameState>&);
     static void pushState (GameState*);
-    static bool pushState (std::string);
+    static bool pushState (const std::string&);
     static void dropState ();
     static std::shared_ptr<GameState> popState ();
 
