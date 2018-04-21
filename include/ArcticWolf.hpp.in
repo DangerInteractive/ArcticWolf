@@ -1,0 +1,6 @@
+// CMake Configuration Template
+#define AW_PROJECT_NAME @PROJECT_NAME@
+#define AW_VERSION_MAJOR @ArcticWolf_VERSION_MAJOR@
+#define AW_VERSION_MINOR @ArcticWolf_VERSION_MINOR@
+#define AW_VERSION_PATCH @ArcticWolf_VERSION_PATCH@
+#define AW_VERSION "@PROJECT_VERSION@"
