@@ -1,5 +1,5 @@
-#ifndef H_CLASS_BUTTON
-#define H_CLASS_BUTTON
+#ifndef H_AW_BUTTON
+#define H_AW_BUTTON
 
 #include <string>
 #include <functional>
@@ -9,6 +9,7 @@
 #include "Window.hpp"
 #include "Controller.hpp"
 
+namespace aw {
 class Button {
 
 public:
@@ -111,5 +112,6 @@ private:
     sf::Text m_textElement;
 
 };
+}
 
 #endif

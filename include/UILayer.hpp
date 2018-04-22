@@ -1,8 +1,9 @@
-#ifndef H_CLASS_UILAYER
-#define H_CLASS_UILAYER
+#ifndef H_AW_UILAYER
+#define H_AW_UILAYER
 
-#include <map>
+#include <memory>
 #include "Layer.hpp"
+#include "PriorityVector.hpp"
 #include "UIElement.hpp"
 
 namespace aw {
@@ -10,7 +11,7 @@ class UILayer : public Layer {
 
 public:
 
-    UILayer () = default;
+    UILayer ();
     ~UILayer () = default;
 
     UILayer (UILayer&&) = default;
@@ -19,9 +20,18 @@ public:
     UILayer (const UILayer&) = default;
     UILayer& operator = (const UILayer&) = default;
 
+    const std::vector<UIElement*> getRenderVector ();
+
+    void onNewElement (UIElement*);
+    void onRenderCacheInvalidate ();
+
 protected:
 
-    std::map<int, UIElement> m_elements;
+    PriorityVector<UIElement*, std::greater<UIElement*>> generateRenderCache ();
+
+    std::unique_ptr<UIElement> m_root;
+
+    PriorityVector<UIElement*, std::greater<UIElement*>> m_renderCache;
 
 };
 }

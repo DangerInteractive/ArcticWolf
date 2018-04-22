@@ -1,10 +1,11 @@
-#ifndef H_CLASS_KEYBINDING
-#define H_CLASS_KEYBINDING
+#ifndef H_AW_KEYBINDING
+#define H_AW_KEYBINDING
 
 #include <vector>
 #include <functional>
 #include <SFML/Window.hpp>
 
+namespace aw {
 class Keybinding {
 
 public:
@@ -47,5 +48,6 @@ private:
     bool m_shift;
 
 };
+}
 
 #endif

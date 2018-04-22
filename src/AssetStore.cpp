@@ -1,6 +1,6 @@
 #include "../include/AssetStore.hpp"
 
-bool AssetStore::imageExists (const std::string& key) {
+bool aw::AssetStore::imageExists (const std::string& key) {
 
     if (m_images.find(key) == m_images.end()) {
         return false;
@@ -10,7 +10,7 @@ bool AssetStore::imageExists (const std::string& key) {
 
 }
 
-std::shared_ptr<sf::Image> AssetStore::getImage (const std::string& key) {
+std::shared_ptr<sf::Image> aw::AssetStore::getImage (const std::string& key) {
 
     if (!imageExists(key)) {
         return nullptr;
@@ -20,13 +20,13 @@ std::shared_ptr<sf::Image> AssetStore::getImage (const std::string& key) {
 
 }
 
-bool AssetStore::registerImage (const std::string& key, sf::Image* image) {
+bool aw::AssetStore::registerImage (const std::string& key, sf::Image* image) {
 
     return registerImage(key, std::shared_ptr<sf::Image>(image));
 
 }
 
-bool AssetStore::registerImage (const std::string& key, const std::shared_ptr<sf::Image>& image) {
+bool aw::AssetStore::registerImage (const std::string& key, const std::shared_ptr<sf::Image>& image) {
 
     if (imageExists(key)) {
         return false;
@@ -37,7 +37,7 @@ bool AssetStore::registerImage (const std::string& key, const std::shared_ptr<sf
 
 }
 
-void AssetStore::deleteImage (const std::string& key) {
+void aw::AssetStore::deleteImage (const std::string& key) {
 
     if (!imageExists(key)) {
         return;
@@ -48,7 +48,7 @@ void AssetStore::deleteImage (const std::string& key) {
 
 }
 
-bool AssetStore::soundExists (const std::string& key) {
+bool aw::AssetStore::soundExists (const std::string& key) {
 
     if (m_sounds.find(key) == m_sounds.end()) {
         return false;
@@ -58,7 +58,7 @@ bool AssetStore::soundExists (const std::string& key) {
 
 }
 
-std::shared_ptr<sf::Sound> AssetStore::getSound (const std::string& key) {
+std::shared_ptr<sf::Sound> aw::AssetStore::getSound (const std::string& key) {
 
     if (!soundExists(key)) {
         return nullptr;
@@ -68,13 +68,13 @@ std::shared_ptr<sf::Sound> AssetStore::getSound (const std::string& key) {
 
 }
 
-bool AssetStore::registerSound (const std::string& key, sf::Sound* sound) {
+bool aw::AssetStore::registerSound (const std::string& key, sf::Sound* sound) {
 
     return registerSound(key, std::shared_ptr<sf::Sound>(sound));
 
 }
 
-bool AssetStore::registerSound (const std::string& key, const std::shared_ptr<sf::Sound>& sound) {
+bool aw::AssetStore::registerSound (const std::string& key, const std::shared_ptr<sf::Sound>& sound) {
 
     if (soundExists(key)) {
         return false;
@@ -85,7 +85,7 @@ bool AssetStore::registerSound (const std::string& key, const std::shared_ptr<sf
 
 }
 
-void AssetStore::deleteSound (const std::string& key) {
+void aw::AssetStore::deleteSound (const std::string& key) {
 
     if (!soundExists(key)) {
         return;
@@ -96,7 +96,7 @@ void AssetStore::deleteSound (const std::string& key) {
 
 }
 
-bool AssetStore::fontExists (const std::string& key) {
+bool aw::AssetStore::fontExists (const std::string& key) {
 
     if (m_fonts.find(key) == m_fonts.end()) {
         return false;
@@ -106,7 +106,7 @@ bool AssetStore::fontExists (const std::string& key) {
 
 }
 
-std::shared_ptr<sf::Font> AssetStore::getFont (const std::string& key) {
+std::shared_ptr<sf::Font> aw::AssetStore::getFont (const std::string& key) {
 
     if (!fontExists(key)) {
         return nullptr;
@@ -116,13 +116,13 @@ std::shared_ptr<sf::Font> AssetStore::getFont (const std::string& key) {
 
 }
 
-bool AssetStore::registerFont (const std::string& key, sf::Font* font) {
+bool aw::AssetStore::registerFont (const std::string& key, sf::Font* font) {
 
     return registerFont(key, std::shared_ptr<sf::Font>(font));
 
 }
 
-bool AssetStore::registerFont (const std::string& key, const std::shared_ptr<sf::Font>& font) {
+bool aw::AssetStore::registerFont (const std::string& key, const std::shared_ptr<sf::Font>& font) {
 
     if (fontExists(key)) {
         return false;
@@ -133,7 +133,7 @@ bool AssetStore::registerFont (const std::string& key, const std::shared_ptr<sf:
 
 }
 
-void AssetStore::deleteFont (const std::string& key) {
+void aw::AssetStore::deleteFont (const std::string& key) {
 
     if (!fontExists(key)) {
         return;
@@ -144,6 +144,6 @@ void AssetStore::deleteFont (const std::string& key) {
 
 }
 
-std::unordered_map<std::string, std::shared_ptr<sf::Image>> AssetStore::m_images;
-std::unordered_map<std::string, std::shared_ptr<sf::Sound>> AssetStore::m_sounds;
-std::unordered_map<std::string, std::shared_ptr<sf::Font>> AssetStore::m_fonts;
+std::unordered_map<std::string, std::shared_ptr<sf::Image>> aw::AssetStore::m_images;
+std::unordered_map<std::string, std::shared_ptr<sf::Sound>> aw::AssetStore::m_sounds;
+std::unordered_map<std::string, std::shared_ptr<sf::Font>> aw::AssetStore::m_fonts;

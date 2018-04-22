@@ -1,7 +1,8 @@
-#ifndef H_CLASS_SCENE
-#define H_CLASS_SCENE
+#ifndef H_AW_SCENE
+#define H_AW_SCENE
 
-#include <map>
+#include <unordered_map>
+#include <memory>
 #include "Layer.hpp"
 
 namespace aw {
@@ -20,7 +21,7 @@ public:
 
 private:
 
-    std::map<int, Layer> m_layers;
+    std::unordered_map<int, std::unique_ptr<Layer>> m_layers;
 
 };
 }

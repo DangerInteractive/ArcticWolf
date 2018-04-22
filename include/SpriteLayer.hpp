@@ -1,9 +1,9 @@
-#ifndef H_CLASS_SPRITELAYER
-#define H_CLASS_SPRITELAYER
+#ifndef H_AW_SPRITELAYER
+#define H_AW_SPRITELAYER
 
 #include <map>
 #include "Layer.hpp"
-#include "Sprite.hpp"
+#include "SpriteComponent.hpp"
 
 namespace aw {
 class SpriteLayer : public Layer {
@@ -21,7 +21,7 @@ public:
 
 protected:
 
-    std::map<int, Sprite> m_sprite;
+    std::map<int, SpriteComponent*> m_sprite;
 
 };
 }

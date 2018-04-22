@@ -1,32 +1,32 @@
 #include "../include/GameLoop.hpp"
 
-unsigned int GameLoop::getRenderFrameRate () {
+unsigned int aw::GameLoop::getRenderFrameRate () {
 
     return m_renderFrameRate;
 
 }
 
-unsigned int GameLoop::getUpdateTickRate () {
+unsigned int aw::GameLoop::getUpdateTickRate () {
 
     return m_updateTickRate;
 
 }
 
-void GameLoop::setRenderFrameRate (unsigned int framesPerSecond) {
+void aw::GameLoop::setRenderFrameRate (unsigned int framesPerSecond) {
 
     m_renderSeconds = 1.0 / framesPerSecond;
     m_renderFrameRate = framesPerSecond;
 
 }
 
-void GameLoop::setUpdateTickRate (unsigned int ticksPerSecond) {
+void aw::GameLoop::setUpdateTickRate (unsigned int ticksPerSecond) {
 
     m_updateSeconds = 1.0 / ticksPerSecond;
     m_updateTickRate = ticksPerSecond;
 
 }
 
-void GameLoop::run () {
+void aw::GameLoop::run () {
 
     m_windowOpen = true;
     m_isRunning = true;
@@ -178,25 +178,25 @@ void GameLoop::run () {
 
 }
 
-void GameLoop::freeze () {
+void aw::GameLoop::freeze () {
 
     m_isRunning = false;
 
 }
 
-bool GameLoop::isRunning () {
+bool aw::GameLoop::isRunning () {
 
     return m_isRunning;
 
 }
 
-void GameLoop::render (double deltaTime) {
+void aw::GameLoop::render (double deltaTime) {
 
     GameStateManager::render(deltaTime);
 
 }
 
-void GameLoop::update (
+void aw::GameLoop::update (
     sf::Clock& updateLoopClock,
     unsigned int& updateTickRate,
     double& updateSeconds,
@@ -236,18 +236,18 @@ void GameLoop::update (
 
 }
 
-unsigned int GameLoop::m_renderFrameRate = 60;
-unsigned int GameLoop::m_updateTickRate = 40;
+unsigned int aw::GameLoop::m_renderFrameRate = 60;
+unsigned int aw::GameLoop::m_updateTickRate = 40;
 
-double GameLoop::m_renderSeconds = 1.0 / 60.0;
-double GameLoop::m_updateSeconds = 1.0 / 40.0;
+double aw::GameLoop::m_renderSeconds = 1.0 / 60.0;
+double aw::GameLoop::m_updateSeconds = 1.0 / 40.0;
 
-sf::Clock GameLoop::m_updateLoopClock;
+sf::Clock aw::GameLoop::m_updateLoopClock;
 
-bool GameLoop::m_windowOpen = false;
-bool GameLoop::m_isRunning = false;
+bool aw::GameLoop::m_windowOpen = false;
+bool aw::GameLoop::m_isRunning = false;
 
-bool GameLoop::m_renderLoopRunning = false;
-bool GameLoop::m_updateLoopRunning = false;
+bool aw::GameLoop::m_renderLoopRunning = false;
+bool aw::GameLoop::m_updateLoopRunning = false;
 
-std::thread GameLoop::m_updateThread;
+std::thread aw::GameLoop::m_updateThread;

@@ -1,5 +1,5 @@
-#ifndef H_CLASS_WINDOW
-#define H_CLASS_WINDOW
+#ifndef H_AW_WINDOW
+#define H_AW_WINDOW
 
 #include <string>
 #include <functional>
@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "Log.hpp"
 
+namespace aw {
 class Window {
 
 public:
@@ -75,5 +76,6 @@ private:
     static std::mutex mutex_title;
 
 };
+}
 
 #endif

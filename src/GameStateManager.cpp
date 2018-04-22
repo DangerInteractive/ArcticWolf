@@ -1,6 +1,6 @@
 #include "../include/GameStateManager.hpp"
 
-void GameStateManager::pushState (const std::shared_ptr<GameState>& state) {
+void aw::GameStateManager::pushState (const std::shared_ptr<GameState>& state) {
 
     m_states.push_back(state);
     state->onPush();
@@ -18,14 +18,14 @@ void GameStateManager::pushState (const std::shared_ptr<GameState>& state) {
 
 }
 
-void GameStateManager::pushState (GameState* state) {
+void aw::GameStateManager::pushState (GameState* state) {
 
     std::shared_ptr<GameState> ptrState(state);
     pushState(ptrState);
 
 }
 
-bool GameStateManager::pushState (const std::string& key) {
+bool aw::GameStateManager::pushState (const std::string& key) {
 
     if (!GameStateStore::stateExists(key)) {
         return false;
@@ -38,7 +38,7 @@ bool GameStateManager::pushState (const std::string& key) {
 
 }
 
-void GameStateManager::dropState () {
+void aw::GameStateManager::dropState () {
 
     auto top = m_states[m_states.size() - 1];
     top->onDeactivate();
@@ -57,7 +57,7 @@ void GameStateManager::dropState () {
 
 }
 
-std::shared_ptr<GameState> GameStateManager::popState () {
+std::shared_ptr<aw::GameState> aw::GameStateManager::popState () {
 
     auto top = m_states[m_states.size() - 1];
     top->onDeactivate();
@@ -77,7 +77,7 @@ std::shared_ptr<GameState> GameStateManager::popState () {
 
 }
 
-void GameStateManager::refreshLiveStates () {
+void aw::GameStateManager::refreshLiveStates () {
 
     std::vector<std::shared_ptr<GameState>> liveRenderStates;
     std::vector<std::shared_ptr<GameState>> liveUpdateStates;
@@ -140,7 +140,7 @@ void GameStateManager::refreshLiveStates () {
 
 }
 
-void GameStateManager::clearWindow () {
+void aw::GameStateManager::clearWindow () {
 
     for (int i = m_statesLiveRender.size() - 1; i >= 0; --i) {
         m_statesLiveRender[i]->clearWindow();
@@ -148,7 +148,7 @@ void GameStateManager::clearWindow () {
 
 }
 
-void GameStateManager::render (double deltaTime) {
+void aw::GameStateManager::render (double deltaTime) {
 
     for (int i = 0; i < m_statesLiveRender.size(); ++i) {
         m_statesLiveRender[i]->render(deltaTime);
@@ -156,7 +156,7 @@ void GameStateManager::render (double deltaTime) {
 
 }
 
-void GameStateManager::update () {
+void aw::GameStateManager::update () {
 
     for (int i = 0; i < m_statesLiveUpdate.size(); ++i) {
         m_statesLiveUpdate[i]->update();
@@ -164,7 +164,7 @@ void GameStateManager::update () {
 
 }
 
-void GameStateManager::loopInput () {
+void aw::GameStateManager::loopInput () {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().loopCheck();
@@ -172,7 +172,7 @@ void GameStateManager::loopInput () {
 
 }
 
-void GameStateManager::keyPressCallback (sf::Keyboard::Key key, bool alt, bool control, bool shift) {
+void aw::GameStateManager::keyPressCallback (sf::Keyboard::Key key, bool alt, bool control, bool shift) {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onKeyPress(key, alt, control, shift);
@@ -180,7 +180,7 @@ void GameStateManager::keyPressCallback (sf::Keyboard::Key key, bool alt, bool c
 
 }
 
-void GameStateManager::keyReleaseCallback (sf::Keyboard::Key key, bool alt, bool control, bool shift) {
+void aw::GameStateManager::keyReleaseCallback (sf::Keyboard::Key key, bool alt, bool control, bool shift) {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onKeyRelease(key, alt, control, shift);
@@ -188,7 +188,7 @@ void GameStateManager::keyReleaseCallback (sf::Keyboard::Key key, bool alt, bool
 
 }
 
-void GameStateManager::textCallback (sf::Uint32 character) {
+void aw::GameStateManager::textCallback (sf::Uint32 character) {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onText(character);
@@ -196,7 +196,7 @@ void GameStateManager::textCallback (sf::Uint32 character) {
 
 }
 
-void GameStateManager::cursorCallback (double xPos, double yPos) {
+void aw::GameStateManager::cursorCallback (double xPos, double yPos) {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onCursor(xPos, yPos);
@@ -204,7 +204,7 @@ void GameStateManager::cursorCallback (double xPos, double yPos) {
 
 }
 
-void GameStateManager::cursorInCallback () {
+void aw::GameStateManager::cursorInCallback () {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onCursorIn();
@@ -212,7 +212,7 @@ void GameStateManager::cursorInCallback () {
 
 }
 
-void GameStateManager::cursorOutCallback () {
+void aw::GameStateManager::cursorOutCallback () {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onCursorOut();
@@ -220,7 +220,7 @@ void GameStateManager::cursorOutCallback () {
 
 }
 
-void GameStateManager::focusCallback () {
+void aw::GameStateManager::focusCallback () {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onFocus();
@@ -228,7 +228,7 @@ void GameStateManager::focusCallback () {
 
 }
 
-void GameStateManager::unfocusCallback () {
+void aw::GameStateManager::unfocusCallback () {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onUnfocus();
@@ -236,7 +236,7 @@ void GameStateManager::unfocusCallback () {
 
 }
 
-void GameStateManager::mouseButtonPressCallback (int buttons, int x, int y) {
+void aw::GameStateManager::mouseButtonPressCallback (int buttons, int x, int y) {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onMouseButtonPress(buttons, x, y);
@@ -244,7 +244,7 @@ void GameStateManager::mouseButtonPressCallback (int buttons, int x, int y) {
 
 }
 
-void GameStateManager::mouseButtonReleaseCallback (int buttons, int x, int y) {
+void aw::GameStateManager::mouseButtonReleaseCallback (int buttons, int x, int y) {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onMouseButtonRelease(buttons, x, y);
@@ -252,7 +252,7 @@ void GameStateManager::mouseButtonReleaseCallback (int buttons, int x, int y) {
 
 }
 
-void GameStateManager::scrollCallback (double offset) {
+void aw::GameStateManager::scrollCallback (double offset) {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onScroll(offset);
@@ -260,7 +260,7 @@ void GameStateManager::scrollCallback (double offset) {
 
 }
 
-void GameStateManager::resizeCallback (int width, int height) {
+void aw::GameStateManager::resizeCallback (int width, int height) {
 
     for (int i = 0; i < m_statesLiveInput.size(); ++i) {
         m_statesLiveInput[i]->getController().onResize(width, height);
@@ -268,8 +268,8 @@ void GameStateManager::resizeCallback (int width, int height) {
 
 }
 
-std::vector<std::shared_ptr<GameState>> GameStateManager::m_states;
+std::vector<std::shared_ptr<aw::GameState>> aw::GameStateManager::m_states;
 
-std::vector<std::shared_ptr<GameState>> GameStateManager::m_statesLiveRender;
-std::vector<std::shared_ptr<GameState>> GameStateManager::m_statesLiveUpdate;
-std::vector<std::shared_ptr<GameState>> GameStateManager::m_statesLiveInput;
+std::vector<std::shared_ptr<aw::GameState>> aw::GameStateManager::m_statesLiveRender;
+std::vector<std::shared_ptr<aw::GameState>> aw::GameStateManager::m_statesLiveUpdate;
+std::vector<std::shared_ptr<aw::GameState>> aw::GameStateManager::m_statesLiveInput;

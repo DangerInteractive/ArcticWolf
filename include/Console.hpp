@@ -1,5 +1,5 @@
-#ifndef H_CLASS_CONSOLE
-#define H_CLASS_CONSOLE
+#ifndef H_AW_CONSOLE
+#define H_AW_CONSOLE
 
 #include <iostream>
 #include <mutex>

@@ -1,6 +1,6 @@
 #include "../include/Button.hpp"
 
-Button::Button (
+aw::Button::Button (
     ButtonCallback& callback,
     Controller& controller,
     std::shared_ptr<sf::Font> font,
@@ -10,9 +10,8 @@ Button::Button (
     const sf::Color& backgroundColor,
     const sf::Color& foregroundColor,
     Button::Alignment alignment
-) :
-  m_controller(controller)
-{
+)
+: m_controller(controller) {
 
     setCallback(callback);
     setFont(font);
@@ -31,7 +30,7 @@ Button::Button (
 
 }
 
-Button::Button (
+aw::Button::Button (
     ButtonCallback& callback,
     Controller& controller,
     const std::string& font,
@@ -41,9 +40,8 @@ Button::Button (
     const sf::Color& backgroundColor,
     const sf::Color& foregroundColor,
     Button::Alignment alignment
-) :
-  m_controller(controller)
-{
+)
+: m_controller(controller) {
 
     setCallback(callback);
     setFont(AssetStore::getFont(font));
@@ -62,20 +60,20 @@ Button::Button (
 
 }
 
-void Button::render () {
+void aw::Button::render () {
 
     Window::draw(m_borderElement);
     Window::draw(m_textElement);
 
 }
 
-void Button::onPress () {
+void aw::Button::onPress () {
 
     m_callback();
 
 }
 
-void Button::onClick (int button, int x, int y) {
+void aw::Button::onClick (int button, int x, int y) {
 
     if (button == sf::Mouse::Left) {
         auto rect = m_borderElement.getLocalBounds();
@@ -138,14 +136,14 @@ void Button::onClick (int button, int x, int y) {
 
 }
 
-void Button::setPosition (float x, float y) {
+void aw::Button::setPosition (float x, float y) {
 
     setPositionX(x);
     setPositionY(y);
 
 }
 
-void Button::setPositionX (float x) {
+void aw::Button::setPositionX (float x) {
 
     m_positionX = x;
 
@@ -153,7 +151,7 @@ void Button::setPositionX (float x) {
 
 }
 
-void Button::setPositionY (float y) {
+void aw::Button::setPositionY (float y) {
 
     m_positionY = y;
 
@@ -161,7 +159,7 @@ void Button::setPositionY (float y) {
 
 }
 
-void Button::setAlignment (Button::Alignment alignment) {
+void aw::Button::setAlignment (Button::Alignment alignment) {
 
     m_alignment = alignment;
 
@@ -169,49 +167,49 @@ void Button::setAlignment (Button::Alignment alignment) {
 
 }
 
-const Button::ButtonCallback& Button::getCallback () const {
+const aw::Button::ButtonCallback& aw::Button::getCallback () const {
 
     return m_callback;
 
 }
 
-const Controller& Button::getController () const {
+const aw::Controller& aw::Button::getController () const {
 
     return m_controller;
 
 }
 
-std::shared_ptr<sf::Font> Button::getFont () const {
+std::shared_ptr<sf::Font> aw::Button::getFont () const {
 
     return m_font;
 
 }
 
-std::string Button::getText () const {
+std::string aw::Button::getText () const {
 
     return m_text;
 
 }
 
-sf::Color Button::getBackgroundColor () const {
+sf::Color aw::Button::getBackgroundColor () const {
 
     return m_backgroundColor;
 
 }
 
-sf::Color Button::getForegroundColor () const {
+sf::Color aw::Button::getForegroundColor () const {
 
     return m_foregroundColor;
 
 }
 
-void Button::setCallback (Button::ButtonCallback& callback) {
+void aw::Button::setCallback (Button::ButtonCallback& callback) {
 
     m_callback = callback;
 
 }
 
-void Button::setFont (const std::shared_ptr<sf::Font>& font) {
+void aw::Button::setFont (const std::shared_ptr<sf::Font>& font) {
 
     m_font = font;
 
@@ -219,7 +217,7 @@ void Button::setFont (const std::shared_ptr<sf::Font>& font) {
 
 }
 
-void Button::setText (const std::string& text) {
+void aw::Button::setText (const std::string& text) {
 
     m_text = text;
 
@@ -227,7 +225,7 @@ void Button::setText (const std::string& text) {
 
 }
 
-void Button::setFontSize (float size) {
+void aw::Button::setFontSize (float size) {
 
     if (size < 0) {
         size = 0.0;
@@ -239,7 +237,7 @@ void Button::setFontSize (float size) {
 
 }
 
-void Button::setPadding (float padding) {
+void aw::Button::setPadding (float padding) {
 
     if (padding < 0) {
         padding = 0.0;
@@ -251,7 +249,7 @@ void Button::setPadding (float padding) {
 
 }
 
-void Button::setBackgroundColor (const sf::Color& color) {
+void aw::Button::setBackgroundColor (const sf::Color& color) {
 
     m_backgroundColor = color;
 
@@ -259,7 +257,7 @@ void Button::setBackgroundColor (const sf::Color& color) {
 
 }
 
-void Button::setForegroundColor (const sf::Color& color) {
+void aw::Button::setForegroundColor (const sf::Color& color) {
 
     m_foregroundColor = color;
 
@@ -267,7 +265,7 @@ void Button::setForegroundColor (const sf::Color& color) {
 
 }
 
-void Button::updatePositionX () {
+void aw::Button::updatePositionX () {
 
     auto rect = m_borderElement.getLocalBounds();
     float offsetX = 0.0;
@@ -316,7 +314,7 @@ void Button::updatePositionX () {
 
 }
 
-void Button::updatePositionY () {
+void aw::Button::updatePositionY () {
 
     auto rect = m_borderElement.getLocalBounds();
     float offsetY = 0.0;
@@ -365,14 +363,14 @@ void Button::updatePositionY () {
 
 }
 
-void Button::updateAlignment () {
+void aw::Button::updateAlignment () {
 
     updatePositionX();
     updatePositionY();
 
 }
 
-void Button::updateSize () {
+void aw::Button::updateSize () {
 
     auto rect = m_textElement.getLocalBounds();
 
@@ -388,7 +386,7 @@ void Button::updateSize () {
 
 }
 
-void Button::updateFont () {
+void aw::Button::updateFont () {
 
     m_textElement.setFont(*m_font);
 
@@ -396,7 +394,7 @@ void Button::updateFont () {
 
 }
 
-void Button::updateText () {
+void aw::Button::updateText () {
 
     m_textElement.setString(m_text);
 
@@ -404,25 +402,25 @@ void Button::updateText () {
 
 }
 
-void Button::updateFontSize () {
+void aw::Button::updateFontSize () {
 
     updateSize();
 
 }
 
-void Button::updatePadding () {
+void aw::Button::updatePadding () {
 
     updateSize();
 
 }
 
-void Button::updateBackgroundColor () {
+void aw::Button::updateBackgroundColor () {
 
     m_borderElement.setFillColor(m_backgroundColor);
 
 }
 
-void Button::updateForegroundColor () {
+void aw::Button::updateForegroundColor () {
 
     m_borderElement.setOutlineColor(m_foregroundColor);
 

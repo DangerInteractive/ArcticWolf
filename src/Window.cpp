@@ -1,12 +1,12 @@
 #include "../include/Window.hpp"
 
-sf::RenderWindow* Window::getContext () {
+sf::RenderWindow* aw::Window::getContext () {
 
     return m_context.get();
 
 }
 
-bool Window::exists () {
+bool aw::Window::exists () {
 
     if (m_context) {
         return true;
@@ -16,7 +16,7 @@ bool Window::exists () {
 
 }
 
-bool Window::isOpen () {
+bool aw::Window::isOpen () {
 
     if (Window::exists() && m_context->isOpen()) {
         return true;
@@ -26,7 +26,7 @@ bool Window::isOpen () {
 
 }
 
-void Window::open () {
+void aw::Window::open () {
 
     if (Window::exists()) {
         aw::Log::warning("window", "Window cannot be opened because it is already open.");
@@ -48,7 +48,7 @@ void Window::open () {
 
 }
 
-void Window::close () {
+void aw::Window::close () {
 
     if (!Window::isOpen()) {
         aw::Log::warning("window", "Window cannot be closed because it is not open.");
@@ -62,7 +62,7 @@ void Window::close () {
 
 }
 
-void Window::display () {
+void aw::Window::display () {
 
     if (!Window::exists()) {
         aw::Log::warning("window", "Cannot display window because it is not open.");
@@ -73,13 +73,13 @@ void Window::display () {
 
 }
 
-void Window::draw (const sf::Drawable& drawable, const sf::RenderStates& states) {
+void aw::Window::draw (const sf::Drawable& drawable, const sf::RenderStates& states) {
 
     m_context->draw(drawable, states);
 
 }
 
-void Window::clear () {
+void aw::Window::clear () {
 
     if (!Window::exists()) {
         aw::Log::warning("window", "Cannot clear window because it is not open.");
@@ -90,7 +90,7 @@ void Window::clear () {
 
 }
 
-void Window::clear (const sf::Color& color) {
+void aw::Window::clear (const sf::Color& color) {
 
     if (!Window::exists()) {
         aw::Log::warning("window", "Cannot clear window because it is not open.");
@@ -100,25 +100,25 @@ void Window::clear (const sf::Color& color) {
 
 }
 
-bool Window::pollEvent (sf::Event& windowEvent) {
+bool aw::Window::pollEvent (sf::Event& windowEvent) {
 
     return m_context->pollEvent(windowEvent);
 
 }
 
-int Window::getWidth () {
+int aw::Window::getWidth () {
 
     return m_width;
 
 }
 
-int Window::getHeight () {
+int aw::Window::getHeight () {
 
     return m_height;
 
 }
 
-void Window::setWidth (int width) {
+void aw::Window::setWidth (int width) {
 
     std::unique_lock<std::mutex> lock_size(mutex_size);
 
@@ -127,7 +127,7 @@ void Window::setWidth (int width) {
 
 }
 
-void Window::setHeight (int height) {
+void aw::Window::setHeight (int height) {
 
     std::unique_lock<std::mutex> lock_size(mutex_size);
 
@@ -136,7 +136,7 @@ void Window::setHeight (int height) {
 
 }
 
-void Window::setSize (int width, int height) {
+void aw::Window::setSize (int width, int height) {
 
     std::unique_lock<std::mutex> lock_size(mutex_size);
 
@@ -146,13 +146,13 @@ void Window::setSize (int width, int height) {
 
 }
 
-std::string Window::getTitle () {
+std::string aw::Window::getTitle () {
 
     return m_title;
 
 }
 
-void Window::setTitle (const std::string& title) {
+void aw::Window::setTitle (const std::string& title) {
 
     std::unique_lock<std::mutex> lock_title(mutex_title);
 
@@ -161,7 +161,7 @@ void Window::setTitle (const std::string& title) {
 
 }
 
-void Window::pushWindowSize () {
+void aw::Window::pushWindowSize () {
 
     if (m_context) {
         m_context->setSize(sf::Vector2u(m_width, m_height));
@@ -169,7 +169,7 @@ void Window::pushWindowSize () {
 
 }
 
-void Window::pushWindowTitle () {
+void aw::Window::pushWindowTitle () {
 
     if (m_context) {
         m_context->setTitle(sf::String(m_title));
@@ -177,11 +177,11 @@ void Window::pushWindowTitle () {
 
 }
 
-std::unique_ptr<sf::RenderWindow> Window::m_context;
+std::unique_ptr<sf::RenderWindow> aw::Window::m_context;
 
-int Window::m_width = 800;
-int Window::m_height = 600;
-std::mutex Window::mutex_size;
+int aw::Window::m_width = 800;
+int aw::Window::m_height = 600;
+std::mutex aw::Window::mutex_size;
 
-std::string Window::m_title = "";
-std::mutex Window::mutex_title;
+std::string aw::Window::m_title = "";
+std::mutex aw::Window::mutex_title;

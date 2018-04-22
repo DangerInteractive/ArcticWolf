@@ -1,10 +1,11 @@
-#ifndef H_CLASS_LOOPKEYBINDING
-#define H_CLASS_LOOPKEYBINDING
+#ifndef H_AW_LOOPKEYBINDING
+#define H_AW_LOOPKEYBINDING
 
 #include <vector>
 #include <functional>
 #include <SFML/Window.hpp>
 
+namespace aw {
 class LoopKeybinding {
 
 public:
@@ -36,5 +37,6 @@ private:
     std::vector<sf::Keyboard::Key> m_keys;
 
 };
+}
 
 #endif

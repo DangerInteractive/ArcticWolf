@@ -1,5 +1,5 @@
-#ifndef H_CLASS_LOG
-#define H_CLASS_LOG
+#ifndef H_AW_LOG
+#define H_AW_LOG
 
 #include <iostream>
 #include <string>

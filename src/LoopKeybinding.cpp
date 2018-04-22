@@ -1,14 +1,12 @@
 #include "../include/LoopKeybinding.hpp"
 
-LoopKeybinding::LoopKeybinding (
+aw::LoopKeybinding::LoopKeybinding (
     const LoopKeybindingCallback& callback,
     sf::Keyboard::Key key
-) :
-  m_callback(callback),
-  m_keys(std::vector<sf::Keyboard::Key>(1, key))
-{}
+)
+: m_callback(callback), m_keys(std::vector<sf::Keyboard::Key>(1, key)) {}
 
-LoopKeybinding::LoopKeybinding (
+aw::LoopKeybinding::LoopKeybinding (
     const LoopKeybindingCallback& callback,
     const std::vector<sf::Keyboard::Key>& keys
 ) :
@@ -16,7 +14,7 @@ LoopKeybinding::LoopKeybinding (
   m_keys(keys)
 {}
 
-bool LoopKeybinding::check (const std::vector<sf::Keyboard::Key>& keys) {
+bool aw::LoopKeybinding::check (const std::vector<sf::Keyboard::Key>& keys) {
 
     for (int i = 0; i < m_keys.size(); ++i) {
         bool found = false;
@@ -37,7 +35,7 @@ bool LoopKeybinding::check (const std::vector<sf::Keyboard::Key>& keys) {
 
 }
 
-void LoopKeybinding::process (const std::vector<sf::Keyboard::Key>& keys) {
+void aw::LoopKeybinding::process (const std::vector<sf::Keyboard::Key>& keys) {
 
     if (check(keys)) {
         m_callback();
@@ -45,25 +43,25 @@ void LoopKeybinding::process (const std::vector<sf::Keyboard::Key>& keys) {
 
 }
 
-const LoopKeybinding::LoopKeybindingCallback& LoopKeybinding::getCallback () const {
+const aw::LoopKeybinding::LoopKeybindingCallback& aw::LoopKeybinding::getCallback () const {
 
     return m_callback;
 
 }
 
-std::vector<sf::Keyboard::Key> LoopKeybinding::getKeys () const {
+std::vector<sf::Keyboard::Key> aw::LoopKeybinding::getKeys () const {
 
     return m_keys;
 
 }
 
-void LoopKeybinding::setCallback (const LoopKeybindingCallback& callback) {
+void aw::LoopKeybinding::setCallback (const LoopKeybindingCallback& callback) {
 
     m_callback = callback;
 
 }
 
-void LoopKeybinding::setKeys (const std::vector<sf::Keyboard::Key>& keys) {
+void aw::LoopKeybinding::setKeys (const std::vector<sf::Keyboard::Key>& keys) {
 
     m_keys = keys;
 

@@ -1,5 +1,5 @@
-#ifndef H_CLASS_GAMESTATEMANAGER
-#define H_CLASS_GAMESTATEMANAGER
+#ifndef H_AW_GAMESTATEMANAGER
+#define H_AW_GAMESTATEMANAGER
 
 #include <vector>
 #include <memory>
@@ -13,6 +13,7 @@
 #include "Window.hpp"
 #include "Log.hpp"
 
+namespace aw {
 class GameStateManager {
 
 public:
@@ -69,5 +70,6 @@ private:
     static std::vector<std::shared_ptr<GameState>> m_statesLiveInput;
 
 };
+}
 
 #endif

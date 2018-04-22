@@ -1,6 +1,6 @@
 #include "../include/GameState.hpp"
 
-void GameState::clearWindow () {
+void aw::GameState::clearWindow () {
 
     if (m_clearWindow) {
         Window::clear(m_clearColor);
@@ -8,19 +8,19 @@ void GameState::clearWindow () {
 
 }
 
-Controller& GameState::getController () {
+aw::Controller& aw::GameState::getController () {
 
     return m_controller;
 
 }
 
-void GameState::setController (Controller& controller) {
+void aw::GameState::setController (Controller& controller) {
 
     m_controller = controller;
 
 }
 
-void GameState::clearController () {
+void aw::GameState::clearController () {
 
     m_controller = Controller();
 

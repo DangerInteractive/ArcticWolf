@@ -1,5 +1,5 @@
-#ifndef H_CLASS_CONTROLLER
-#define H_CLASS_CONTROLLER
+#ifndef H_AW_CONTROLLER
+#define H_AW_CONTROLLER
 
 #include <vector>
 #include <functional>
@@ -8,6 +8,7 @@
 #include "Keybinding.hpp"
 #include "LoopKeybinding.hpp"
 
+namespace aw {
 class Controller {
 
 public:
@@ -24,7 +25,7 @@ public:
     typedef std::function<void(double)> ScrollCallback;
     typedef std::function<void(int,int)> ResizeCallback;
 
-    Controller ();
+    Controller () = default;
     ~Controller () = default;
 
     Controller (Controller&&) = default;
@@ -106,5 +107,6 @@ private:
     int m_lastMouseY = 0;
 
 };
+}
 
 #endif

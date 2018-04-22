@@ -1,5 +1,7 @@
-#ifndef H_CLASS_LAYER
-#define H_CLASS_LAYER
+#ifndef H_AW_LAYER
+#define H_AW_LAYER
+
+namespace aw { class Scene; }
 
 namespace aw {
 class Layer {
@@ -15,7 +17,11 @@ public:
     Layer (const Layer&) = default;
     Layer& operator = (const Layer&) = default;
 
+    Scene* getScene () const;
+
 protected:
+
+    Scene* m_scene {nullptr};
 
 };
 }

@@ -58,7 +58,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     find_program (CMAKE_CXX_CPPCHECK NAMES cppcheck)
     if (CMAKE_CXX_CPPCHECK)
         list (APPEND CMAKE_CXX_CPPCHECK
-            "--enable-warning"
+            "--enable=warning"
             "--inconclusive"
             "--force"
             "--inline-suppr"
@@ -85,8 +85,10 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/lib/FastNoise/FastNoise.cpp
 
     # game engine
+    ${PROJECT_SOURCE_DIR}/src/Actor.cpp
     ${PROJECT_SOURCE_DIR}/src/AssetStore.cpp
     ${PROJECT_SOURCE_DIR}/src/Button.cpp
+    ${PROJECT_SOURCE_DIR}/src/Component.cpp
     ${PROJECT_SOURCE_DIR}/src/Console.cpp
     ${PROJECT_SOURCE_DIR}/src/ConsoleLogObserver.cpp
     ${PROJECT_SOURCE_DIR}/src/Controller.cpp
@@ -96,10 +98,18 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/GameState.cpp
     ${PROJECT_SOURCE_DIR}/src/GameStateManager.cpp
     ${PROJECT_SOURCE_DIR}/src/GameStateStore.cpp
+    ${PROJECT_SOURCE_DIR}/src/GridLayer.cpp
     ${PROJECT_SOURCE_DIR}/src/Keybinding.cpp
+    ${PROJECT_SOURCE_DIR}/src/Layer.cpp
     ${PROJECT_SOURCE_DIR}/src/Log.cpp
     ${PROJECT_SOURCE_DIR}/src/LogObserver.cpp
+    ${PROJECT_SOURCE_DIR}/src/LoopKeybinding.cpp
     ${PROJECT_SOURCE_DIR}/src/ProgressBar.cpp
+    ${PROJECT_SOURCE_DIR}/src/Scene.cpp
+    ${PROJECT_SOURCE_DIR}/src/SpriteComponent.cpp
+    ${PROJECT_SOURCE_DIR}/src/SpriteLayer.cpp
+    ${PROJECT_SOURCE_DIR}/src/UIElement.cpp
+    ${PROJECT_SOURCE_DIR}/src/UILayer.cpp
     ${PROJECT_SOURCE_DIR}/src/Window.cpp
 
 )
@@ -114,8 +124,10 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/lib/FastNoise/FastNoise.h
 
     # game engine
+    ${PROJECT_SOURCE_DIR}/include/Actor.hpp
     ${PROJECT_SOURCE_DIR}/include/AssetStore.hpp
     ${PROJECT_SOURCE_DIR}/include/Button.hpp
+    ${PROJECT_SOURCE_DIR}/include/Component.hpp
     ${PROJECT_SOURCE_DIR}/include/Console.hpp
     ${PROJECT_SOURCE_DIR}/include/ConsoleLogObserver.hpp
     ${PROJECT_SOURCE_DIR}/include/Controller.hpp
@@ -125,10 +137,20 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/GameState.hpp
     ${PROJECT_SOURCE_DIR}/include/GameStateManager.hpp
     ${PROJECT_SOURCE_DIR}/include/GameStateStore.hpp
+    ${PROJECT_SOURCE_DIR}/include/GridLayer.hpp
     ${PROJECT_SOURCE_DIR}/include/Keybinding.hpp
+    ${PROJECT_SOURCE_DIR}/include/Layer.hpp
     ${PROJECT_SOURCE_DIR}/include/Log.hpp
+    ${PROJECT_SOURCE_DIR}/include/LogLevel.hpp
     ${PROJECT_SOURCE_DIR}/include/LogObserver.hpp
+    ${PROJECT_SOURCE_DIR}/include/LoopKeybinding.hpp
+    ${PROJECT_SOURCE_DIR}/include/PriorityVector.hpp
     ${PROJECT_SOURCE_DIR}/include/ProgressBar.hpp
+    ${PROJECT_SOURCE_DIR}/include/Scene.hpp
+    ${PROJECT_SOURCE_DIR}/include/SpriteComponent.hpp
+    ${PROJECT_SOURCE_DIR}/include/SpriteLayer.hpp
+    ${PROJECT_SOURCE_DIR}/include/UIElement.hpp
+    ${PROJECT_SOURCE_DIR}/include/UILayer.hpp
     ${PROJECT_SOURCE_DIR}/include/Window.hpp
 
 )

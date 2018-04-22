@@ -1,5 +1,5 @@
-#ifndef H_CLASS_FILE
-#define H_CLASS_FILE
+#ifndef H_AW_FILE
+#define H_AW_FILE
 
 #include <string>
 #include <fstream>

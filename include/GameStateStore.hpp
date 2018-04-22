@@ -1,11 +1,12 @@
-#ifndef H_CLASS_GAMESTATESTORE
-#define H_CLASS_GAMESTATESTORE
+#ifndef H_AW_GAMESTATESTORE
+#define H_AW_GAMESTATESTORE
 
 #include <unordered_map>
 #include <string>
 #include <memory>
 #include "GameState.hpp"
 
+namespace aw {
 class GameStateStore {
 
 public:
@@ -42,5 +43,6 @@ private:
     static std::unordered_map<std::string, std::shared_ptr<GameState>> m_stateMap;
 
 };
+}
 
 #endif

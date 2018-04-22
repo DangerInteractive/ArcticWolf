@@ -1,9 +1,10 @@
-#ifndef H_CLASS_PROGRESSBAR
-#define H_CLASS_PROGRESSBAR
+#ifndef H_AW_PROGRESSBAR
+#define H_AW_PROGRESSBAR
 
 #include <SFML/Graphics.hpp>
 #include "Window.hpp"
 
+namespace aw {
 class ProgressBar {
 
 public:
@@ -79,5 +80,6 @@ private:
     sf::RectangleShape m_foregroundRect;
 
 };
+}
 
 #endif

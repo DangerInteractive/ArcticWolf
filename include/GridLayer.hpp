@@ -1,5 +1,5 @@
-#ifndef H_CLASS_GRIDLAYER
-#define H_CLASS_GRIDLAYER
+#ifndef H_AW_GRIDLAYER
+#define H_AW_GRIDLAYER
 
 #include "Layer.hpp"
 

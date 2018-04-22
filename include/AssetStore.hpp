@@ -1,5 +1,5 @@
-#ifndef H_CLASS_ASSETSTORE
-#define H_CLASS_ASSETSTORE
+#ifndef H_AW_ASSETSTORE
+#define H_AW_ASSETSTORE
 
 #include <unordered_map>
 #include <string>
@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+namespace aw {
 class AssetStore {
 
 public:
@@ -81,5 +82,6 @@ private:
     static std::unordered_map<std::string, std::shared_ptr<sf::Font>> m_fonts;
 
 };
+}
 
 #endif

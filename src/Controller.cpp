@@ -1,8 +1,6 @@
 #include "../include/Controller.hpp"
 
-Controller::Controller () {}
-
-void Controller::loopCheck () {
+void aw::Controller::loopCheck () {
 
     if (m_mouseIsDown) {
         onLoopMouseButton(m_lastButtons, m_lastMouseX, m_lastMouseY);
@@ -21,7 +19,7 @@ void Controller::loopCheck () {
 
 }
 
-void Controller::onKeyPress (sf::Keyboard::Key key, bool alt, bool control, bool shift) {
+void aw::Controller::onKeyPress (sf::Keyboard::Key key, bool alt, bool control, bool shift) {
 
     for (int i = 0; i < m_keybindings.size(); ++i) {
         m_keybindings[i].process(true, key, alt, control, shift);
@@ -29,7 +27,7 @@ void Controller::onKeyPress (sf::Keyboard::Key key, bool alt, bool control, bool
 
 }
 
-void Controller::onKeyRelease (sf::Keyboard::Key key, bool alt, bool control, bool shift) {
+void aw::Controller::onKeyRelease (sf::Keyboard::Key key, bool alt, bool control, bool shift) {
 
     for (int i = 0; i < m_keybindings.size(); ++i) {
         m_keybindings[i].process(false, key, alt, control, shift);
@@ -37,7 +35,7 @@ void Controller::onKeyRelease (sf::Keyboard::Key key, bool alt, bool control, bo
 
 }
 
-void Controller::onLoopKey (const std::vector<sf::Keyboard::Key>& keys) {
+void aw::Controller::onLoopKey (const std::vector<sf::Keyboard::Key>& keys) {
 
     for (int i = 0; i < m_loopKeybindings.size(); ++i) {
         m_loopKeybindings[i].process(keys);
@@ -45,7 +43,7 @@ void Controller::onLoopKey (const std::vector<sf::Keyboard::Key>& keys) {
 
 }
 
-void Controller::onText (sf::Uint32 character) {
+void aw::Controller::onText (sf::Uint32 character) {
 
     for (int i = 0; i < m_textCallbacks.size(); ++i) {
         m_textCallbacks[i](character);
@@ -53,7 +51,7 @@ void Controller::onText (sf::Uint32 character) {
 
 }
 
-void Controller::onCursor (double xPos, double yPos) {
+void aw::Controller::onCursor (double xPos, double yPos) {
 
     m_lastMouseX = xPos;
     m_lastMouseY = yPos;
@@ -63,7 +61,7 @@ void Controller::onCursor (double xPos, double yPos) {
 
 }
 
-void Controller::onCursorIn () {
+void aw::Controller::onCursorIn () {
 
     for (int i = 0; i < m_cursorInCallbacks.size(); ++i) {
         m_cursorInCallbacks[i]();
@@ -71,7 +69,7 @@ void Controller::onCursorIn () {
 
 }
 
-void Controller::onCursorOut () {
+void aw::Controller::onCursorOut () {
 
     for (int i = 0; i < m_cursorOutCallbacks.size(); ++i) {
         m_cursorOutCallbacks[i]();
@@ -79,7 +77,7 @@ void Controller::onCursorOut () {
 
 }
 
-void Controller::onFocus () {
+void aw::Controller::onFocus () {
 
     for (int i = 0; i < m_focusCallbacks.size(); ++i) {
         m_focusCallbacks[i]();
@@ -87,7 +85,7 @@ void Controller::onFocus () {
 
 }
 
-void Controller::onUnfocus () {
+void aw::Controller::onUnfocus () {
 
     for (int i = 0; i < m_unfocusCallbacks.size(); ++i) {
         m_unfocusCallbacks[i]();
@@ -95,7 +93,7 @@ void Controller::onUnfocus () {
 
 }
 
-void Controller::onMouseButtonPress (int buttons, int x, int y) {
+void aw::Controller::onMouseButtonPress (int buttons, int x, int y) {
 
     m_lastButtons = buttons;
     m_lastMouseX = x;
@@ -107,7 +105,7 @@ void Controller::onMouseButtonPress (int buttons, int x, int y) {
 
 }
 
-void Controller::onMouseButtonRelease (int buttons, int x, int y) {
+void aw::Controller::onMouseButtonRelease (int buttons, int x, int y) {
 
     m_mouseIsDown = false;
     for (int i = 0; i < m_mouseButtonReleaseCallbacks.size(); ++i) {
@@ -116,7 +114,7 @@ void Controller::onMouseButtonRelease (int buttons, int x, int y) {
 
 }
 
-void Controller::onLoopMouseButton (int buttons, int x, int y) {
+void aw::Controller::onLoopMouseButton (int buttons, int x, int y) {
 
     for (int i = 0; i < m_loopMouseButtonCallbacks.size(); ++i) {
         m_loopMouseButtonCallbacks[i](buttons, x, y);
@@ -124,7 +122,7 @@ void Controller::onLoopMouseButton (int buttons, int x, int y) {
 
 }
 
-void Controller::onScroll (double offset) {
+void aw::Controller::onScroll (double offset) {
 
     for (int i = 0; i < m_scrollCallbacks.size(); ++i) {
         m_scrollCallbacks[i](offset);
@@ -132,7 +130,7 @@ void Controller::onScroll (double offset) {
 
 }
 
-void Controller::onResize (int width, int height) {
+void aw::Controller::onResize (int width, int height) {
 
     for (int i = 0; i < m_resizeCallbacks.size(); ++i) {
         m_resizeCallbacks[i](width, height);
@@ -140,37 +138,37 @@ void Controller::onResize (int width, int height) {
 
 }
 
-std::vector<Keybinding> Controller::getKeybindings () const {
+std::vector<aw::Keybinding> aw::Controller::getKeybindings () const {
 
     return m_keybindings;
 
 }
 
-std::vector<LoopKeybinding> Controller::getLoopKeybindings () const {
+std::vector<aw::LoopKeybinding> aw::Controller::getLoopKeybindings () const {
 
     return m_loopKeybindings;
 
 }
 
-void Controller::setKeybindings (const std::vector<Keybinding>& keybindings) {
+void aw::Controller::setKeybindings (const std::vector<Keybinding>& keybindings) {
 
     m_keybindings = keybindings;
 
 }
 
-void Controller::addKeybinding (const Keybinding& keybinding) {
+void aw::Controller::addKeybinding (const Keybinding& keybinding) {
 
     m_keybindings.push_back(std::move(keybinding));
 
 }
 
-void Controller::clearKeybindings () {
+void aw::Controller::clearKeybindings () {
 
     m_keybindings = std::vector<Keybinding>();
 
 }
 
-void Controller::setLoopKeybindings (const std::vector<LoopKeybinding>& loopKeybindings) {
+void aw::Controller::setLoopKeybindings (const std::vector<LoopKeybinding>& loopKeybindings) {
 
     clearLoopKeybindings();
 
@@ -180,7 +178,7 @@ void Controller::setLoopKeybindings (const std::vector<LoopKeybinding>& loopKeyb
 
 }
 
-void Controller::addLoopKeybinding (const LoopKeybinding& loopKeybinding) {
+void aw::Controller::addLoopKeybinding (const LoopKeybinding& loopKeybinding) {
 
     for (int i = 0; i < loopKeybinding.getKeys().size(); ++i) {
         bool insert = true;
@@ -201,140 +199,140 @@ void Controller::addLoopKeybinding (const LoopKeybinding& loopKeybinding) {
 
 }
 
-void Controller::clearLoopKeybindings () {
+void aw::Controller::clearLoopKeybindings () {
 
     m_loopKeybindings = std::vector<LoopKeybinding>();
     m_keysToLoop = std::vector<sf::Keyboard::Key>();
 
 }
 
-void Controller::addTextCallback (const TextCallback& textCallback) {
+void aw::Controller::addTextCallback (const TextCallback& textCallback) {
 
     m_textCallbacks.push_back(textCallback);
 
 }
 
-void Controller::clearTextCallbacks () {
+void aw::Controller::clearTextCallbacks () {
 
     m_textCallbacks = std::vector<TextCallback>();
 
 }
 
-void Controller::addCursorCallback (const CursorCallback& cursorCallback) {
+void aw::Controller::addCursorCallback (const CursorCallback& cursorCallback) {
 
     m_cursorCallbacks.push_back(cursorCallback);
 
 }
 
-void Controller::clearCursorCallbacks () {
+void aw::Controller::clearCursorCallbacks () {
 
     m_cursorCallbacks = std::vector<CursorCallback>();
 
 }
 
-void Controller::addCursorInCallback (const CursorInCallback& cursorInCallback) {
+void aw::Controller::addCursorInCallback (const CursorInCallback& cursorInCallback) {
 
     m_cursorInCallbacks.push_back(cursorInCallback);
 
 }
 
-void Controller::clearCursorInCallbacks () {
+void aw::Controller::clearCursorInCallbacks () {
 
     m_cursorInCallbacks = std::vector<CursorInCallback>();
 
 }
 
-void Controller::addCursorOutCallback (const CursorOutCallback& cursorOutCallback) {
+void aw::Controller::addCursorOutCallback (const CursorOutCallback& cursorOutCallback) {
 
     m_cursorOutCallbacks.push_back(cursorOutCallback);
 
 }
 
-void Controller::clearCursorOutCallbacks () {
+void aw::Controller::clearCursorOutCallbacks () {
 
     m_cursorOutCallbacks = std::vector<CursorOutCallback>();
 
 }
 
-void Controller::addFocusCallback (const FocusCallback& focusCallback) {
+void aw::Controller::addFocusCallback (const FocusCallback& focusCallback) {
 
     m_focusCallbacks.push_back(focusCallback);
 
 }
 
-void Controller::clearFocusCallbacks () {
+void aw::Controller::clearFocusCallbacks () {
 
     m_focusCallbacks = std::vector<FocusCallback>();
 
 }
 
-void Controller::addUnfocusCallback (const UnfocusCallback& unfocusCallback) {
+void aw::Controller::addUnfocusCallback (const UnfocusCallback& unfocusCallback) {
 
     m_unfocusCallbacks.push_back(unfocusCallback);
 
 }
 
-void Controller::clearUnfocusCallbacks () {
+void aw::Controller::clearUnfocusCallbacks () {
 
     m_unfocusCallbacks = std::vector<UnfocusCallback>();
 
 }
 
-void Controller::addMouseButtonPressCallback (const MouseButtonPressCallback& mouseButtonPressCallback) {
+void aw::Controller::addMouseButtonPressCallback (const MouseButtonPressCallback& mouseButtonPressCallback) {
 
     m_mouseButtonPressCallbacks.push_back(mouseButtonPressCallback);
 
 }
 
-void Controller::clearMouseButtonPressCallbacks () {
+void aw::Controller::clearMouseButtonPressCallbacks () {
 
     m_mouseButtonPressCallbacks = std::vector<MouseButtonPressCallback>();
 
 }
 
-void Controller::addMouseButtonReleaseCallback (const MouseButtonReleaseCallback& mouseButtonReleaseCallback) {
+void aw::Controller::addMouseButtonReleaseCallback (const MouseButtonReleaseCallback& mouseButtonReleaseCallback) {
 
     m_mouseButtonReleaseCallbacks.push_back(mouseButtonReleaseCallback);
 
 }
 
-void Controller::clearMouseButtonReleaseCallbacks () {
+void aw::Controller::clearMouseButtonReleaseCallbacks () {
 
     m_mouseButtonReleaseCallbacks = std::vector<MouseButtonReleaseCallback>();
 
 }
 
-void Controller::addLoopMouseButtonCallback (const LoopMouseButtonCallback& loopMouseButtonCallback) {
+void aw::Controller::addLoopMouseButtonCallback (const LoopMouseButtonCallback& loopMouseButtonCallback) {
 
     m_loopMouseButtonCallbacks.push_back(loopMouseButtonCallback);
 
 }
 
-void Controller::clearLoopMouseButtonCallbacks () {
+void aw::Controller::clearLoopMouseButtonCallbacks () {
 
     m_loopMouseButtonCallbacks = std::vector<LoopMouseButtonCallback>();
 
 }
 
-void Controller::addScrollCallback (const ScrollCallback& scrollCallback) {
+void aw::Controller::addScrollCallback (const ScrollCallback& scrollCallback) {
 
     m_scrollCallbacks.push_back(scrollCallback);
 
 }
 
-void Controller::clearScrollCallbacks () {
+void aw::Controller::clearScrollCallbacks () {
 
     m_scrollCallbacks = std::vector<ScrollCallback>();
 
 }
 
-void Controller::addResizeCallback (const ResizeCallback& resizeCallback) {
+void aw::Controller::addResizeCallback (const ResizeCallback& resizeCallback) {
 
     m_resizeCallbacks.push_back(resizeCallback);
 
 }
 
-void Controller::clearResizeCallbacks () {
+void aw::Controller::clearResizeCallbacks () {
 
     m_resizeCallbacks = std::vector<ResizeCallback>();
 

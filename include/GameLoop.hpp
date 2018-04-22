@@ -1,5 +1,5 @@
-#ifndef H_CLASS_GAMELOOP
-#define H_CLASS_GAMELOOP
+#ifndef H_AW_GAMELOOP
+#define H_AW_GAMELOOP
 
 #include <thread>
 #include <chrono>
@@ -9,6 +9,7 @@
 #include "Window.hpp"
 #include "Log.hpp"
 
+namespace aw {
 class GameLoop {
 
 public:
@@ -55,5 +56,6 @@ private:
     static std::thread m_updateThread;
 
 };
+}
 
 #endif

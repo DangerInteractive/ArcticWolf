@@ -1,10 +1,11 @@
-#ifndef H_CLASS_GAMESTATE
-#define H_CLASS_GAMESTATE
+#ifndef H_AW_GAMESTATE
+#define H_AW_GAMESTATE
 
 #include "Controller.hpp"
 #include "Window.hpp"
-class GameStateManager;
+namespace aw { class GameStateManager; }
 
+namespace aw {
 class GameState {
 
 public:
@@ -51,5 +52,6 @@ protected:
     sf::Color m_clearColor {0, 0, 0, 255};
 
 };
+}
 
 #endif

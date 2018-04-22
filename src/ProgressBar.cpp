@@ -1,6 +1,6 @@
 #include "../include/ProgressBar.hpp"
 
-ProgressBar::ProgressBar (
+aw::ProgressBar::ProgressBar (
     float width,
     float height,
     float padding,
@@ -24,23 +24,23 @@ ProgressBar::ProgressBar (
 
 }
 
-ProgressBar::~ProgressBar () {}
+aw::ProgressBar::~ProgressBar () {}
 
-void ProgressBar::render () {
+void aw::ProgressBar::render () {
 
     Window::draw(m_backgroundRect);
     Window::draw(m_foregroundRect);
 
 }
 
-void ProgressBar::setPosition (float x, float y) {
+void aw::ProgressBar::setPosition (float x, float y) {
 
     setPositionX(x);
     setPositionY(y);
 
 }
 
-void ProgressBar::setPositionX (float x) {
+void aw::ProgressBar::setPositionX (float x) {
 
     m_positionX = x;
 
@@ -48,7 +48,7 @@ void ProgressBar::setPositionX (float x) {
 
 }
 
-void ProgressBar::setPositionY (float y) {
+void aw::ProgressBar::setPositionY (float y) {
 
     m_positionY = y;
 
@@ -56,14 +56,14 @@ void ProgressBar::setPositionY (float y) {
 
 }
 
-void ProgressBar::setOrigin (float x, float y) {
+void aw::ProgressBar::setOrigin (float x, float y) {
 
     setOriginX(x);
     setOriginY(y);
 
 }
 
-void ProgressBar::setOriginX (float x) {
+void aw::ProgressBar::setOriginX (float x) {
 
     m_originX = x;
 
@@ -71,7 +71,7 @@ void ProgressBar::setOriginX (float x) {
 
 }
 
-void ProgressBar::setOriginY (float y) {
+void aw::ProgressBar::setOriginY (float y) {
 
     m_originY = y;
 
@@ -79,57 +79,57 @@ void ProgressBar::setOriginY (float y) {
 
 }
 
-void ProgressBar::setOriginToCenter () {
+void aw::ProgressBar::setOriginToCenter () {
 
     setOriginX(m_width * 0.5);
     setOriginY(m_height * 0.5);
 
 }
 
-void ProgressBar::setOriginToTopLeft () {
+void aw::ProgressBar::setOriginToTopLeft () {
 
     setOriginX(0);
     setOriginY(0);
 
 }
 
-double ProgressBar::getFill () const {
+double aw::ProgressBar::getFill () const {
 
     return m_fill;
 
 }
 
-float ProgressBar::getWidth () const {
+float aw::ProgressBar::getWidth () const {
 
     return m_width;
 
 }
 
-float ProgressBar::getHeight () const {
+float aw::ProgressBar::getHeight () const {
 
     return m_height;
 
 }
 
-float ProgressBar::getPadding () const {
+float aw::ProgressBar::getPadding () const {
 
     return m_padding;
 
 }
 
-sf::Color ProgressBar::getBackgroundColor () const {
+sf::Color aw::ProgressBar::getBackgroundColor () const {
 
     return m_backgroundColor;
 
 }
 
-sf::Color ProgressBar::getForegroundColor () const {
+sf::Color aw::ProgressBar::getForegroundColor () const {
 
     return m_foregroundColor;
 
 }
 
-void ProgressBar::setFill (double fill) {
+void aw::ProgressBar::setFill (double fill) {
 
     if (fill < 0) {
         fill = 0;
@@ -143,7 +143,7 @@ void ProgressBar::setFill (double fill) {
 
 }
 
-double ProgressBar::incrementFill (double fill) {
+double aw::ProgressBar::incrementFill (double fill) {
 
     fill += m_fill;
     setFill(fill);
@@ -152,7 +152,7 @@ double ProgressBar::incrementFill (double fill) {
 
 }
 
-double ProgressBar::decrementFill (double fill) {
+double aw::ProgressBar::decrementFill (double fill) {
 
     fill = m_fill - fill;
     setFill(fill);
@@ -161,7 +161,7 @@ double ProgressBar::decrementFill (double fill) {
 
 }
 
-void ProgressBar::setWidth (float width) {
+void aw::ProgressBar::setWidth (float width) {
 
     if (width < 0.0) {
         width = 0.0;
@@ -173,7 +173,7 @@ void ProgressBar::setWidth (float width) {
 
 }
 
-void ProgressBar::setHeight (float height) {
+void aw::ProgressBar::setHeight (float height) {
 
     if (height < 0.0) {
         height = 0.0;
@@ -185,7 +185,7 @@ void ProgressBar::setHeight (float height) {
 
 }
 
-void ProgressBar::setPadding (float padding) {
+void aw::ProgressBar::setPadding (float padding) {
 
     m_padding = padding;
 
@@ -193,7 +193,7 @@ void ProgressBar::setPadding (float padding) {
 
 }
 
-void ProgressBar::setBackgroundColor (const sf::Color& color) {
+void aw::ProgressBar::setBackgroundColor (const sf::Color& color) {
 
     m_backgroundColor = color;
 
@@ -201,7 +201,7 @@ void ProgressBar::setBackgroundColor (const sf::Color& color) {
 
 }
 
-void ProgressBar::setForegroundColor (const sf::Color& color) {
+void aw::ProgressBar::setForegroundColor (const sf::Color& color) {
 
     m_foregroundColor = color;
 
@@ -209,33 +209,33 @@ void ProgressBar::setForegroundColor (const sf::Color& color) {
 
 }
 
-void ProgressBar::updatePositionX () {
+void aw::ProgressBar::updatePositionX () {
 
     m_backgroundRect.setPosition(m_positionX - m_originX, m_backgroundRect.getPosition().y);
     m_foregroundRect.setPosition(m_positionX + m_padding - m_originX, m_foregroundRect.getPosition().y);
 
 }
 
-void ProgressBar::updatePositionY () {
+void aw::ProgressBar::updatePositionY () {
 
     m_backgroundRect.setPosition(m_backgroundRect.getPosition().x, m_positionY - m_originY);
     m_foregroundRect.setPosition(m_foregroundRect.getPosition().x, m_positionY + m_padding - m_originY);
 
 }
 
-void ProgressBar::updateOriginX () {
+void aw::ProgressBar::updateOriginX () {
 
     updatePositionX();
 
 }
 
-void ProgressBar::updateOriginY () {
+void aw::ProgressBar::updateOriginY () {
 
     updatePositionY();
 
 }
 
-void ProgressBar::updateWidth () {
+void aw::ProgressBar::updateWidth () {
 
     m_backgroundRect.setSize(
         sf::Vector2f(
@@ -252,7 +252,7 @@ void ProgressBar::updateWidth () {
 
 }
 
-void ProgressBar::updateHeight () {
+void aw::ProgressBar::updateHeight () {
 
     m_backgroundRect.setSize(
         sf::Vector2f(
@@ -269,13 +269,13 @@ void ProgressBar::updateHeight () {
 
 }
 
-void ProgressBar::updateFill () {
+void aw::ProgressBar::updateFill () {
 
     updateWidth();
 
 }
 
-void ProgressBar::updatePadding () {
+void aw::ProgressBar::updatePadding () {
 
     updateWidth();
     updateHeight();
@@ -286,13 +286,13 @@ void ProgressBar::updatePadding () {
 
 }
 
-void ProgressBar::updateBackgroundColor () {
+void aw::ProgressBar::updateBackgroundColor () {
 
     m_backgroundRect.setFillColor(m_backgroundColor);
 
 }
 
-void ProgressBar::updateForegroundColor () {
+void aw::ProgressBar::updateForegroundColor () {
 
     m_foregroundRect.setFillColor(m_foregroundColor);
 
