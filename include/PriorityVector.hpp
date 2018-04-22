@@ -25,7 +25,7 @@ public:
         auto iter = m_vector.begin();
         bool inserted = false;
         while (iter != m_vector.end()) {
-            if (Compare(element, m_vector.at(iter))) {
+            if (Compare()(element, *iter)) {
                 m_vector.insert(iter, element);
                 inserted = true;
                 break;
@@ -40,15 +40,7 @@ public:
 
     void refresh () {
 
-        auto cur = m_vector.begin();
-        auto next = std::next(m_vector.begin());
-        while (next != m_vector.end()) {
-            if (!Compare(m_vector.at(cur), m_vector.at(next))) {
-                iter_swap(cur, next);
-            }
-            cur = std::next(cur);
-            next = std::next(next);
-        }
+        std::sort(m_vector.start(), m_vector.end(), Compare());
 
     }
 

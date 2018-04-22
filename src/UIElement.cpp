@@ -1,4 +1,5 @@
 #include "../include/UIElement.hpp"
+#include "../include/UILayer.hpp"
 
 const std::vector<std::unique_ptr<aw::UIElement>>& aw::UIElement::getChildrenReference () const {
 

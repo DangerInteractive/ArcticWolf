@@ -5,11 +5,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-#ifndef H_AW_UILAYER
-namespace aw { class UILayer {
-    public: void onRenderCacheInvalidate ();
-}; }
-#endif
+namespace aw { class UILayer; }
 
 namespace aw {
 class UIElement {

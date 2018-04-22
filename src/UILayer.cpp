@@ -14,7 +14,7 @@ void aw::UILayer::onNewElement (UIElement* element) {
 
 void aw::UILayer::onRenderCacheInvalidate () {
 
-    auto newCache = generateRenderVector();
+    auto newCache = generateRenderCache();
 
     m_renderCache = newCache;
 
