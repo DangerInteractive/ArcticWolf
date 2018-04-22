@@ -93,6 +93,7 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/ConsoleLogObserver.cpp
     ${PROJECT_SOURCE_DIR}/src/Controller.cpp
     ${PROJECT_SOURCE_DIR}/src/File.cpp
+    ${PROJECT_SOURCE_DIR}/src/FileLogObserver.cpp
     ${PROJECT_SOURCE_DIR}/src/FunctionLogObserver.cpp
     ${PROJECT_SOURCE_DIR}/src/GameLoop.cpp
     ${PROJECT_SOURCE_DIR}/src/GameState.cpp
@@ -136,6 +137,7 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/ConsoleLogObserver.hpp
     ${PROJECT_SOURCE_DIR}/include/Controller.hpp
     ${PROJECT_SOURCE_DIR}/include/File.hpp
+    ${PROJECT_SOURCE_DIR}/include/FileLogObserver.hpp
     ${PROJECT_SOURCE_DIR}/include/FunctionLogObserver.hpp
     ${PROJECT_SOURCE_DIR}/include/GameLoop.hpp
     ${PROJECT_SOURCE_DIR}/include/GameState.hpp
