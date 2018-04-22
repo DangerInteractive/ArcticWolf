@@ -4,6 +4,7 @@
 #include <memory>
 #include "Layer.hpp"
 #include "PriorityVector.hpp"
+#include "PointerGreater.hpp"
 #include "UIElement.hpp"
 
 namespace aw {
@@ -11,7 +12,7 @@ class UILayer : public Layer {
 
 public:
 
-    typedef PriorityVector<UIElement*, std::greater<UIElement*>> UIElementPriorityVector;
+    typedef PriorityVector<UIElement*, PointerGreater<UIElement*>> UIElementPriorityVector;
 
     UILayer ();
     ~UILayer () = default;

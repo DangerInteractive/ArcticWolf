@@ -99,34 +99,10 @@ public:
     bool operator >= (const UIElement&) const;
     bool operator == (const UIElement&) const;
     bool operator != (const UIElement&) const;
-    template <typename T>
-    bool operator < (T&& right) const {
-        return (getZIndex() < std::forward<T>(right));
-    }
-    template <typename T>
-    bool operator <= (T&& right) const {
-        return (getZIndex() <= std::forward<T>(right));
-    }
-    template <typename T>
-    bool operator > (T&& right) const {
-        return (getZIndex() > std::forward<T>(right));
-    }
-    template <typename T>
-    bool operator >= (T&& right) const {
-        return (getZIndex() >= std::forward<T>(right));
-    }
-    template <typename T>
-    bool operator == (T&& right) const {
-        return (getZIndex() == std::forward<T>(right));
-    }
-    template <typename T>
-    bool operator != (T&& right) const {
-        return (getZIndex() != std::forward<T>(right));
-    }
 
 protected:
 
-    virtual void dirtyZIndexCallback ();
+    virtual void dirtyZIndexCallback (UIElement*) {};
 
     std::vector<std::unique_ptr<UIElement>> m_children;
     UIElement* m_parent;

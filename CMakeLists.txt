@@ -105,6 +105,9 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/LogObserver.cpp
     ${PROJECT_SOURCE_DIR}/src/LoopKeybinding.cpp
     ${PROJECT_SOURCE_DIR}/src/ProgressBar.cpp
+    ${PROJECT_SOURCE_DIR}/src/Renderable.cpp
+    ${PROJECT_SOURCE_DIR}/src/RenderComponent.cpp
+    ${PROJECT_SOURCE_DIR}/src/Renderer.cpp
     ${PROJECT_SOURCE_DIR}/src/Scene.cpp
     ${PROJECT_SOURCE_DIR}/src/SceneStore.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteComponent.cpp
@@ -145,8 +148,13 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/LogLevel.hpp
     ${PROJECT_SOURCE_DIR}/include/LogObserver.hpp
     ${PROJECT_SOURCE_DIR}/include/LoopKeybinding.hpp
+    ${PROJECT_SOURCE_DIR}/include/PointerGreater.hpp
+    ${PROJECT_SOURCE_DIR}/include/PointerLess.hpp
     ${PROJECT_SOURCE_DIR}/include/PriorityVector.hpp
     ${PROJECT_SOURCE_DIR}/include/ProgressBar.hpp
+    ${PROJECT_SOURCE_DIR}/include/Renderable.hpp
+    ${PROJECT_SOURCE_DIR}/include/RenderComponent.hpp
+    ${PROJECT_SOURCE_DIR}/include/Renderer.hpp
     ${PROJECT_SOURCE_DIR}/include/Scene.hpp
     ${PROJECT_SOURCE_DIR}/include/SceneStore.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteComponent.hpp

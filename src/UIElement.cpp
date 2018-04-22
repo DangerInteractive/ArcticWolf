@@ -310,6 +310,8 @@ void aw::UIElement::onDirtyZIndex (UIElement* element) {
         }
     }
 
+    dirtyZIndexCallback(element);
+
 }
 
 bool aw::UIElement::operator < (const UIElement& right) const {
@@ -345,11 +347,5 @@ bool aw::UIElement::operator == (const UIElement& right) const {
 bool aw::UIElement::operator != (const UIElement& right) const {
 
     return (getZIndex() != right.getZIndex());
-
-}
-
-void aw::UIElement::dirtyZIndexCallback () {
-
-    return;
 
 }

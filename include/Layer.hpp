@@ -9,7 +9,7 @@ class Layer {
 public:
 
     Layer () = default;
-    ~Layer () = default;
+    virtual ~Layer () = 0;
 
     Layer (Layer&&) = default;
     Layer& operator = (Layer&&) = default;
@@ -19,9 +19,20 @@ public:
 
     Scene* getScene () const;
 
+    double getZIndex () const;
+
+    bool operator == (const Layer&) const;
+    bool operator != (const Layer&) const;
+    bool operator > (const Layer&) const;
+    bool operator >= (const Layer&) const;
+    bool operator < (const Layer&) const;
+    bool operator <= (const Layer&) const;
+
 protected:
 
     Scene* m_scene {nullptr};
+
+    double m_zIndex {0.0};
 
 };
 }

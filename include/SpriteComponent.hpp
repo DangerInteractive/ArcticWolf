@@ -3,10 +3,10 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "Component.hpp"
+#include "RenderComponent.hpp"
 
 namespace aw {
-class SpriteComponent : public Component {
+class SpriteComponent : public RenderComponent {
 
 public:
 

@@ -5,6 +5,7 @@
 #include <memory>
 #include "Layer.hpp"
 #include "PriorityVector.hpp"
+#include "PointerGreater.hpp"
 
 namespace aw {
 class Scene {
@@ -12,7 +13,7 @@ class Scene {
 public:
 
     typedef std::vector<std::unique_ptr<Layer>> LayerVector;
-    typedef PriorityVector<Layer*, std::greater<Layer*>> LayerPriorityVector;
+    typedef PriorityVector<Layer*, PointerGreater<Layer*>> LayerPriorityVector;
 
     Scene ();
     ~Scene () = default;
