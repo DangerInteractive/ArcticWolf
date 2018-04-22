@@ -20,20 +20,20 @@ std::shared_ptr<aw::GameState> aw::GameStateStore::getState (const std::string& 
 
 }
 
-bool aw::GameStateStore::registerState (const std::string& key, GameState* gameState) {
-
-    return registerState(key, std::shared_ptr<GameState>(gameState));
-
-}
-
 bool aw::GameStateStore::registerState (const std::string& key, const std::shared_ptr<GameState>& gameState) {
 
     if (stateExists(key)) {
         return false;
     }
 
-    m_stateMap.insert(std::pair<std::string, std::shared_ptr<GameState>>(key, gameState));
+    m_stateMap.emplace(key, gameState);
     return true;
+
+}
+
+bool aw::GameStateStore::registerState (const std::string& key, GameState* gameState) {
+
+    return registerState(key, std::shared_ptr<GameState>(gameState));
 
 }
 

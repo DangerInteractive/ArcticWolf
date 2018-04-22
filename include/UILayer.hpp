@@ -11,6 +11,8 @@ class UILayer : public Layer {
 
 public:
 
+    typedef PriorityVector<UIElement*, std::greater<UIElement*>> UIElementPriorityVector;
+
     UILayer ();
     ~UILayer () = default;
 
@@ -20,18 +22,18 @@ public:
     UILayer (const UILayer&) = default;
     UILayer& operator = (const UILayer&) = default;
 
-    const std::vector<UIElement*> getRenderVector ();
+    const UIElementPriorityVector& getRenderVector () const;
 
     void onNewElement (UIElement*);
     void onRenderCacheInvalidate ();
 
 protected:
 
-    PriorityVector<UIElement*, std::greater<UIElement*>> generateRenderCache ();
+    UIElementPriorityVector generateRenderCache () const;
 
     std::unique_ptr<UIElement> m_root;
 
-    PriorityVector<UIElement*, std::greater<UIElement*>> m_renderCache;
+    UIElementPriorityVector m_renderCache;
 
 };
 }

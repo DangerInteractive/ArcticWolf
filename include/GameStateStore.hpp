@@ -25,8 +25,8 @@ public:
     static std::shared_ptr<GameState> getState (const std::string&);
 
     // state setters
-    template<typename TState, typename ...TArg>
-    static std::shared_ptr<GameState> createState (const std::string& key, TArg&&... args) {
+    template <typename TState, typename ...TArg>
+    static std::shared_ptr<GameState> makeState (const std::string& key, TArg&&... args) {
         auto state = std::make_shared<TState>(std::forward<TArg>(args)...);
         if (registerState(key, state)) {
             return state;

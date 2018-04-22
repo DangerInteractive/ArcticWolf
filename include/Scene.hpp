@@ -1,16 +1,20 @@
 #ifndef H_AW_SCENE
 #define H_AW_SCENE
 
-#include <unordered_map>
+#include <vector>
 #include <memory>
 #include "Layer.hpp"
+#include "PriorityVector.hpp"
 
 namespace aw {
 class Scene {
 
 public:
 
-    Scene () = default;
+    typedef std::vector<std::unique_ptr<Layer>> LayerVector;
+    typedef PriorityVector<Layer*, std::greater<Layer*>> LayerPriorityVector;
+
+    Scene ();
     ~Scene () = default;
 
     Scene (Scene&&) = default;
@@ -19,9 +23,13 @@ public:
     Scene (const Scene&) = default;
     Scene& operator = (const Scene&) = default;
 
-private:
+protected:
 
-    std::unordered_map<int, std::unique_ptr<Layer>> m_layers;
+    LayerPriorityVector generateRenderCache () const;
+
+    LayerVector m_layers;
+
+    LayerPriorityVector m_renderCache;
 
 };
 }

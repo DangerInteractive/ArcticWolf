@@ -26,8 +26,8 @@ public:
     static std::shared_ptr<sf::Image> getImage (const std::string&);
 
     // image setters
-    template<typename ...T>
-    static std::shared_ptr<sf::Image> createImage (const std::string& key, T&&... args) {
+    template <typename ...T>
+    static std::shared_ptr<sf::Image> makeImage (const std::string& key, T&&... args) {
         auto image = std::make_shared<sf::Image>(std::forward<T>(args)...);
         if (registerImage(key, image)) {
             return image;
@@ -35,8 +35,8 @@ public:
             return nullptr;
         }
     }
-    static bool registerImage (const std::string&, sf::Image*);
     static bool registerImage (const std::string&, const std::shared_ptr<sf::Image>&);
+    static bool registerImage (const std::string&, sf::Image*);
     static void deleteImage (const std::string&);
 
     // sound getters
@@ -44,8 +44,8 @@ public:
     static std::shared_ptr<sf::Sound> getSound (const std::string&);
 
     // sound setters
-    template<typename ...T>
-    static std::shared_ptr<sf::Sound> createSound (const std::string& key, T&&... args) {
+    template <typename ...T>
+    static std::shared_ptr<sf::Sound> makeSound (const std::string& key, T&&... args) {
         auto sound = std::make_shared<sf::Sound>(std::forward(args)...);
         if (registerSound(key, sound)) {
             return sound;
@@ -53,8 +53,8 @@ public:
             return nullptr;
         }
     }
-    static bool registerSound (const std::string&, sf::Sound*);
     static bool registerSound (const std::string&, const std::shared_ptr<sf::Sound>&);
+    static bool registerSound (const std::string&, sf::Sound*);
     static void deleteSound (const std::string&);
 
     // font getters
@@ -62,8 +62,8 @@ public:
     static std::shared_ptr<sf::Font> getFont (const std::string&);
 
     // font setters
-    template<typename ...T>
-    static std::shared_ptr<sf::Font> createFont (const std::string& key, T&&... args) {
+    template <typename ...T>
+    static std::shared_ptr<sf::Font> makeFont (const std::string& key, T&&... args) {
         auto font = std::make_shared<sf::Font>(std::forward(args)...);
         if (registerFont(key, font)) {
             return font;
@@ -71,8 +71,8 @@ public:
             return nullptr;
         }
     }
-    static bool registerFont (const std::string&, sf::Font*);
     static bool registerFont (const std::string&, const std::shared_ptr<sf::Font>&);
+    static bool registerFont (const std::string&, sf::Font*);
     static void deleteFont (const std::string&);
 
 private:

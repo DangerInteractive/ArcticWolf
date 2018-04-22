@@ -106,6 +106,7 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/LoopKeybinding.cpp
     ${PROJECT_SOURCE_DIR}/src/ProgressBar.cpp
     ${PROJECT_SOURCE_DIR}/src/Scene.cpp
+    ${PROJECT_SOURCE_DIR}/src/SceneStore.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteComponent.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteLayer.cpp
     ${PROJECT_SOURCE_DIR}/src/UIElement.cpp
@@ -147,6 +148,7 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/PriorityVector.hpp
     ${PROJECT_SOURCE_DIR}/include/ProgressBar.hpp
     ${PROJECT_SOURCE_DIR}/include/Scene.hpp
+    ${PROJECT_SOURCE_DIR}/include/SceneStore.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteComponent.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteLayer.hpp
     ${PROJECT_SOURCE_DIR}/include/UIElement.hpp

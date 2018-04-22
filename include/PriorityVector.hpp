@@ -40,7 +40,7 @@ public:
 
     void refresh () {
 
-        std::sort(m_vector.start(), m_vector.end(), Compare());
+        std::sort(m_vector.begin(), m_vector.end(), Compare());
 
     }
 

@@ -1,8 +1,11 @@
 #include "../include/UILayer.hpp"
 
-aw::UILayer::UILayer () {
+aw::UILayer::UILayer ()
+: m_renderCache(generateRenderCache()) {}
 
-    m_renderCache = generateRenderCache();
+const aw::UILayer::UIElementPriorityVector& aw::UILayer::getRenderVector () const {
+
+    return m_renderCache;
 
 }
 
@@ -14,20 +17,22 @@ void aw::UILayer::onNewElement (UIElement* element) {
 
 void aw::UILayer::onRenderCacheInvalidate () {
 
-    auto newCache = generateRenderCache();
-
-    m_renderCache = newCache;
+    m_renderCache.refresh();
 
 }
 
-aw::PriorityVector<aw::UIElement*, std::greater<aw::UIElement*>> aw::UILayer::generateRenderCache () {
+aw::UILayer::UIElementPriorityVector aw::UILayer::generateRenderCache () const {
 
-    PriorityVector<UIElement*, std::greater<UIElement*>> cache;
+    UIElementPriorityVector cache;
 
-    auto elements = m_root->getAll();
+    if (m_root != nullptr) {
 
-    for (unsigned int i = 0; i < elements.size(); ++i) {
-        cache.push(elements[i]);
+        auto elements = m_root->getAll();
+
+        for (unsigned int i = 0; i < elements.size(); ++i) {
+            cache.push(elements[i]);
+        }
+
     }
 
     return cache;

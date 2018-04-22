@@ -20,12 +20,6 @@ std::shared_ptr<sf::Image> aw::AssetStore::getImage (const std::string& key) {
 
 }
 
-bool aw::AssetStore::registerImage (const std::string& key, sf::Image* image) {
-
-    return registerImage(key, std::shared_ptr<sf::Image>(image));
-
-}
-
 bool aw::AssetStore::registerImage (const std::string& key, const std::shared_ptr<sf::Image>& image) {
 
     if (imageExists(key)) {
@@ -34,6 +28,12 @@ bool aw::AssetStore::registerImage (const std::string& key, const std::shared_pt
 
     m_images.insert(std::pair<std::string, std::shared_ptr<sf::Image>>(key, image));
     return true;
+
+}
+
+bool aw::AssetStore::registerImage (const std::string& key, sf::Image* image) {
+
+    return registerImage(key, std::shared_ptr<sf::Image>(image));
 
 }
 
@@ -68,12 +68,6 @@ std::shared_ptr<sf::Sound> aw::AssetStore::getSound (const std::string& key) {
 
 }
 
-bool aw::AssetStore::registerSound (const std::string& key, sf::Sound* sound) {
-
-    return registerSound(key, std::shared_ptr<sf::Sound>(sound));
-
-}
-
 bool aw::AssetStore::registerSound (const std::string& key, const std::shared_ptr<sf::Sound>& sound) {
 
     if (soundExists(key)) {
@@ -82,6 +76,12 @@ bool aw::AssetStore::registerSound (const std::string& key, const std::shared_pt
 
     m_sounds.insert(std::pair<std::string, std::shared_ptr<sf::Sound>>(key, sound));
     return true;
+
+}
+
+bool aw::AssetStore::registerSound (const std::string& key, sf::Sound* sound) {
+
+    return registerSound(key, std::shared_ptr<sf::Sound>(sound));
 
 }
 
@@ -116,12 +116,6 @@ std::shared_ptr<sf::Font> aw::AssetStore::getFont (const std::string& key) {
 
 }
 
-bool aw::AssetStore::registerFont (const std::string& key, sf::Font* font) {
-
-    return registerFont(key, std::shared_ptr<sf::Font>(font));
-
-}
-
 bool aw::AssetStore::registerFont (const std::string& key, const std::shared_ptr<sf::Font>& font) {
 
     if (fontExists(key)) {
@@ -130,6 +124,12 @@ bool aw::AssetStore::registerFont (const std::string& key, const std::shared_ptr
 
     m_fonts.insert(std::pair<std::string, std::shared_ptr<sf::Font>>(key, font));
     return true;
+
+}
+
+bool aw::AssetStore::registerFont (const std::string& key, sf::Font* font) {
+
+    return registerFont(key, std::shared_ptr<sf::Font>(font));
 
 }
 
