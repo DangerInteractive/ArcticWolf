@@ -9,7 +9,7 @@ class Layer {
 public:
 
     Layer () = default;
-    virtual ~Layer () = 0;
+    virtual ~Layer () = default;
 
     Layer (Layer&&) = default;
     Layer& operator = (Layer&&) = default;
