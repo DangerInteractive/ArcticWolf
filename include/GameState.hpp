@@ -16,16 +16,16 @@ public:
     static const bool transparentInput = false;
 
     // constructor and destructor
-    GameState () = delete;
+    GameState () = default;
     virtual ~GameState () = default;
 
     // move operations (implement these in derived classes)
-    GameState (GameState&&) = delete;
-    GameState& operator = (GameState&&) = delete;
+    GameState (GameState&&) = default;
+    GameState& operator = (GameState&&) = default;
 
     // copy operations (implement these in derived classes)
-    GameState (const GameState&) = delete;
-    GameState& operator = (const GameState&) = delete;
+    GameState (const GameState&) = default;
+    GameState& operator = (const GameState&) = default;
 
     // state management event callbacks
     virtual void onActivate () = 0;
