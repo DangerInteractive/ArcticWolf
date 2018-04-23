@@ -111,9 +111,11 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/SceneStore.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteComponent.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteLayer.cpp
+    ${PROJECT_SOURCE_DIR}/src/SpriteRenderable.cpp
     ${PROJECT_SOURCE_DIR}/src/TileLayer.cpp
     ${PROJECT_SOURCE_DIR}/src/UIElement.cpp
     ${PROJECT_SOURCE_DIR}/src/UILayer.cpp
+    ${PROJECT_SOURCE_DIR}/src/UIRenderable.cpp
     ${PROJECT_SOURCE_DIR}/src/Window.cpp
 
 )
@@ -159,10 +161,13 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/SceneStore.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteComponent.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteLayer.hpp
+    ${PROJECT_SOURCE_DIR}/include/SpriteRenderable.hpp
     ${PROJECT_SOURCE_DIR}/include/TileLayer.hpp
     ${PROJECT_SOURCE_DIR}/include/TilePlane.hpp
+    ${PROJECT_SOURCE_DIR}/include/TileRenderable.hpp
     ${PROJECT_SOURCE_DIR}/include/UIElement.hpp
     ${PROJECT_SOURCE_DIR}/include/UILayer.hpp
+    ${PROJECT_SOURCE_DIR}/include/UIRenderable.hpp
     ${PROJECT_SOURCE_DIR}/include/Window.hpp
 
 )

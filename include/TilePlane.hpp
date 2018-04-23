@@ -6,15 +6,15 @@
 #include <functional>
 
 namespace aw {
-template <unsigned int Width, unsigned int Height, typename T, unsigned short TileSize, unsigned short PixelSize = 1>
+template <unsigned int Width, unsigned int Height, unsigned short TileSize, unsigned short PixelSize = 1>
 class TilePlane {
 
 public:
 
-    typedef std::function <T(unsigned int, unsigned int)> Initializer;
+    typedef std::function <unsigned int(unsigned int, unsigned int)> Initializer;
 
     TilePlane () = default;
-    explicit TilePlane (T defaultValue) : m_blocks(defaultValue) {}
+    explicit TilePlane (unsigned int defaultValue) : m_blocks(defaultValue) {}
     ~TilePlane () = default;
 
     TilePlane (TilePlane&&) = default;
@@ -39,7 +39,7 @@ public:
         return PixelSize;
     }
 
-    T get (unsigned int x, unsigned int y) const {
+    unsigned int get (unsigned int x, unsigned int y) const {
         return m_blocks[Width * y + x];
     }
 
@@ -47,11 +47,11 @@ public:
         return static_cast<unsigned int>(coordinate / (TileSize * PixelSize));
     }
 
-    T getByPixel (double x, double y) const {
-
+    unsigned int getByCoordinate (double x, double y) const {
+        return m_blocks[Width * subdivide(y) + subdivide(x)];
     }
 
-    void set (T value, unsigned int x, unsigned int y) {
+    void set (unsigned int value, unsigned int x, unsigned int y) {
         m_blocks[Width * y + x] = value;
     }
 
@@ -65,7 +65,7 @@ public:
 
 private:
 
-    std::unique_ptr<std::array<T, Width*Height>> m_blocks;
+    std::unique_ptr<std::array<unsigned int, Width*Height>> m_blocks;
 
 };
 }
