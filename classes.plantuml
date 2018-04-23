@@ -46,16 +46,7 @@ package "Input Handling" #eeeeee {
 
     class aw::Controller
     class aw::Keybinding
-
-    enum aw::KeyAction {
-        PRESS
-        RELEASE
-        REPEAT
-    }
-
-    enum aw::KeyType {
-        ...
-    }
+    class aw::LoopKeybinding
 
 }
 
@@ -158,6 +149,18 @@ package "Window Management" #eeeeee {
 
 }
 
+package "Filesystem Subsystem" #eeeeee {
+
+    class aw::File
+
+}
+
+package "I/O Subsystem" #eeeeee {
+
+    class aw::Console <<Static>>
+
+}
+
 package "SFML Assets" #bbbbee {
 
     class sf::Font
@@ -191,85 +194,92 @@ package "FastNoise" #bbeebb {
 
 }
 
-sf::Font --o aw::AssetStore
-sf::Image --o aw::AssetStore
-sf::Sound --o aw::AssetStore
-aw::GameState --* aw::GameStateManager
-aw::GameState --* aw::GameStateStore
-aw::GameStateManager --> aw::GameStateStore
-aw::GameStateManager --> aw::GameState
-aw::GameLoop --> aw::Window
-aw::GameLoop --> aw::GameStateManager
-aw::GameLoop --> aw::Renderer
-aw::Controller --o aw::GameState
-aw::Keybinding --o aw::Controller
-aw::Controller --> aw::Keybinding
-aw::KeyAction --o aw::Keybinding
-aw::KeyType --o aw::Keybinding
-aw::LogLevel --o aw::Log
-aw::GameStateManager --> aw::Log
-aw::GameLoop --> aw::Log
-aw::Window --> aw::Log
-aw::Scene --* aw::SceneStore
-aw::Layer --* aw::Scene
-aw::TileLayer --|> aw::Layer
-aw::SpriteLayer --|> aw::Layer
-aw::UILayer --|> aw::Layer
-sf::RenderWindow --|> sf::RenderTarget
-aw::Renderer --> sf::RenderWindow
-aw::TileRenderer --|> aw::Renderer
-aw::SpriteRenderer --|> aw::Renderer
-aw::UIRenderer --|> aw::Renderer
-aw::TileRenderable --|> aw::Renderable
-aw::SpriteRenderable --|> aw::Renderable
-aw::UIRenderable --|> aw::Renderable
-aw::SpriteComponent --o aw::Renderable
-aw::Layer --o aw::Renderer
-aw::LogObserver --* aw::Log
-aw::ConsoleLogObserver --|> aw::LogObserver
-aw::FileLogObserver --|> aw::LogObserver
-aw::FunctionLogObserver --|> aw::LogObserver
-aw::UIComponent --* aw::UIElement
-aw::UIElement --o aw::UIElement
-aw::UIElement --* aw::UILayer
-sf::Shape --|> sf::Drawable
-sf::Sprite --|> sf::Drawable
-sf::Text --|> sf::Drawable
-sf::RectangleShape --|> sf::Shape
-sf::CircleShape --|> sf::Shape
-sf::ConvexShape --|> sf::Shape
-aw::PriorityVector --o aw::Scene
-aw::PriorityVector --o aw::UILayer
-aw::PriorityVector --o aw::SpriteLayer
-aw::PriorityVector --o aw::SpriteComponent
-sf::Drawable --o aw::Renderable
-aw::AIComponent --o aw::Entity
-aw::AIStateMachine --o aw::AIComponent
-aw::AIState --* aw::AIStateMachine
-aw::AITransition --* aw::AIStateMachine
-aw::Pathfinder --* aw::AIState
-aw::Hunter --* aw::AIState
-aw::JPSPlusPathfinder --|> aw::Pathfinder
-aw::AStarPathfinder --|> aw::Pathfinder
-aw::CartesianHunter --|> aw::Hunter
-aw::RaycastCartesianHunter --|> aw::Hunter
-aw::TileSet --> aw::World
-aw::TilePlane --* aw::World
-aw::EntityPlane --* aw::World
-aw::Entity --* aw::EntityPlane
-aw::World --* aw::WorldStore
-aw::TilePlane --* aw::World
-aw::TileSet --* aw::World
-aw::EntityPlane --* aw::World
-aw::Scene --o aw::World
-aw::TilePlane --o aw::TileRenderable
+class aw::PriorityVector
+class aw::PointerLess
+class aw::PointerGreater
+
+sf::Font ---o aw::AssetStore
+sf::Image ---o aw::AssetStore
+sf::Sound ---o aw::AssetStore
+aw::GameState ---* aw::GameStateManager
+aw::GameState ---* aw::GameStateStore
+aw::GameStateManager ---> aw::GameStateStore
+aw::GameStateManager ---> aw::GameState
+aw::GameLoop ---> aw::Window
+aw::GameLoop ---> aw::GameStateManager
+aw::GameLoop ---> aw::Renderer
+aw::Controller ---o aw::GameState
+aw::Keybinding ---o aw::Controller
+aw::LoopKeybinding ---o aw::Controller
+aw::Controller ---> aw::Keybinding
+aw::LogLevel ---o aw::Log
+aw::GameStateManager ---> aw::Log
+aw::GameLoop ---> aw::Log
+aw::Window ---> aw::Log
+aw::Scene ---* aw::SceneStore
+aw::Layer ---* aw::Scene
+aw::TileLayer ---|> aw::Layer
+aw::SpriteLayer ---|> aw::Layer
+aw::UILayer ---|> aw::Layer
+sf::RenderWindow ---|> sf::RenderTarget
+aw::Renderer ---> sf::RenderWindow
+aw::TileRenderer ---|> aw::Renderer
+aw::SpriteRenderer ---|> aw::Renderer
+aw::UIRenderer ---|> aw::Renderer
+aw::TileRenderable ---|> aw::Renderable
+aw::SpriteRenderable ---|> aw::Renderable
+aw::UIRenderable ---|> aw::Renderable
+aw::SpriteComponent ---o aw::Renderable
+aw::Renderer ---o aw::Layer
+aw::LogObserver ---* aw::Log
+aw::ConsoleLogObserver ---|> aw::LogObserver
+aw::ConsoleLogObserver ---> aw::Console
+aw::FileLogObserver ---|> aw::LogObserver
+aw::File ---o aw::FileLogObserver
+aw::FunctionLogObserver ---|> aw::LogObserver
+aw::UIComponent ---* aw::UIElement
+aw::UIElement ---o aw::UIElement
+aw::UIElement ---* aw::UILayer
+sf::Shape ---|> sf::Drawable
+sf::Sprite ---|> sf::Drawable
+sf::Text ---|> sf::Drawable
+sf::RectangleShape ---|> sf::Shape
+sf::CircleShape ---|> sf::Shape
+sf::ConvexShape ---|> sf::Shape
+aw::PriorityVector ---o aw::Scene
+aw::PriorityVector ---o aw::UILayer
+aw::PriorityVector ---o aw::SpriteLayer
+aw::PriorityVector ---o aw::SpriteComponent
+sf::Drawable ---o aw::Renderable
+aw::AIComponent ----o aw::ControlComponent
+aw::AIStateMachine ---o aw::AIComponent
+aw::AIState ---* aw::AIStateMachine
+aw::AITransition ---* aw::AIStateMachine
+aw::Pathfinder ---* aw::AIState
+aw::Hunter ---* aw::AIState
+aw::JPSPlusPathfinder ---|> aw::Pathfinder
+aw::AStarPathfinder ---|> aw::Pathfinder
+aw::CartesianHunter ---|> aw::Hunter
+aw::RaycastCartesianHunter ---|> aw::Hunter
+aw::TileSet ---> aw::World
+aw::TilePlane ---* aw::World
+aw::EntityPlane ---* aw::World
+aw::Entity ---* aw::EntityPlane
+aw::World ---* aw::WorldStore
+aw::TilePlane ---* aw::World
+aw::TileSet ---* aw::World
+aw::EntityPlane ---* aw::World
+aw::Scene ---o aw::World
+aw::TilePlane ---o aw::TileRenderable
 aw::Renderer ---> aw::Renderable
-aw::ControlComponent --|> aw::EntityComponent
-aw::InputControlComponent --|> aw::ControlComponent
-aw::NetworkClientControlComponent --|> aw::ControlComponent
-aw::NetworkServerControlComponent --|> aw::ControlComponent
-aw::TilePlaneGenerator --> FastNoise
-aw::TilePlaneGenerator --* aw::TilePlane
-aw::EntitySpawner --* aw::EntityPlane
+aw::ControlComponent ----|> aw::EntityComponent
+aw::InputControlComponent ---|> aw::ControlComponent
+aw::NetworkClientControlComponent ---|> aw::ControlComponent
+aw::NetworkServerControlComponent ---|> aw::ControlComponent
+aw::TilePlaneGenerator ---> FastNoise
+aw::TilePlaneGenerator ---* aw::TilePlane
+aw::EntitySpawner ---* aw::EntityPlane
+aw::PriorityVector ---> aw::PointerLess
+aw::PriorityVector ---> aw::PointerGreater
 
 @enduml
