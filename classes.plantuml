@@ -77,7 +77,6 @@ package "PCG Subsystem" #eeeeee {
 
 package "Rendering Subsystem" #eeeeee {
 
-    class aw::SceneStore
     class aw::Scene
     interface aw::Layer
     class aw::TileLayer
@@ -97,7 +96,6 @@ package "Rendering Subsystem" #eeeeee {
 
 package "World Subsystem" #eeeeee {
 
-    class aw::WorldStore
     class aw::World
     class aw::TilePlane
     class aw::TileSet
@@ -217,7 +215,6 @@ aw::LogLevel ---o aw::Log
 aw::GameStateManager ---> aw::Log
 aw::GameLoop ---> aw::Log
 aw::Window ---> aw::Log
-aw::Scene ---* aw::SceneStore
 aw::Layer ---* aw::Scene
 aw::TileLayer ---|> aw::Layer
 aw::SpriteLayer ---|> aw::Layer
@@ -266,7 +263,6 @@ aw::TileSet ---> aw::World
 aw::TilePlane ---* aw::World
 aw::EntityPlane ---* aw::World
 aw::Entity ---* aw::EntityPlane
-aw::World ---* aw::WorldStore
 aw::TilePlane ---* aw::World
 aw::TileSet ---* aw::World
 aw::EntityPlane ---* aw::World

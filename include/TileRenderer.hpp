@@ -8,7 +8,7 @@
 #include "TileSet.hpp"
 
 namespace aw {
-template <unsigned int Width, unsigned int Height, unsigned short TileSize, unsigned short PixelSize>
+template <unsigned int Width, unsigned int Height, unsigned short TileSize = 16, unsigned short PixelSize = 1>
 class TileRenderer : public Renderer {
 
 public:
@@ -75,6 +75,8 @@ protected:
         auto sprite = tileType->getSprite();
         if (sprite == nullptr) { return; }
 
+        sprite->setOrigin(0, 0);
+        sprite->setScale(PixelSize);
         sprite->setPosition(atX, atY);
         context->draw(sprite);
 

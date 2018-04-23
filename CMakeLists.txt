@@ -108,7 +108,6 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/Renderable.cpp
     ${PROJECT_SOURCE_DIR}/src/Renderer.cpp
     ${PROJECT_SOURCE_DIR}/src/Scene.cpp
-    ${PROJECT_SOURCE_DIR}/src/SceneStore.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteComponent.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteLayer.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteRenderable.cpp
@@ -160,7 +159,6 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/Renderable.hpp
     ${PROJECT_SOURCE_DIR}/include/Renderer.hpp
     ${PROJECT_SOURCE_DIR}/include/Scene.hpp
-    ${PROJECT_SOURCE_DIR}/include/SceneStore.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteComponent.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteLayer.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteRenderable.hpp
@@ -173,6 +171,7 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/UILayer.hpp
     ${PROJECT_SOURCE_DIR}/include/UIRenderable.hpp
     ${PROJECT_SOURCE_DIR}/include/Window.hpp
+    ${PROJECT_SOURCE_DIR}/include/World.hpp
 
 )
 

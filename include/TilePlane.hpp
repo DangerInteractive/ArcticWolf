@@ -7,7 +7,7 @@
 #include "TileSet.hpp"
 
 namespace aw {
-template <unsigned int Width, unsigned int Height, unsigned short TileSize, unsigned short PixelSize = 1>
+template <unsigned int Width, unsigned int Height, unsigned short TileSize = 16, unsigned short PixelSize = 1>
 class TilePlane {
 
 public:
