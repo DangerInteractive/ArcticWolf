@@ -1,8 +1,8 @@
 #include "../include/Button.hpp"
 
 aw::Button::Button (
-    ButtonCallback& callback,
-    Controller& controller,
+    const ButtonCallback& callback,
+    Controller* controller,
     std::shared_ptr<sf::Font> font,
     const std::string& text,
     float fontSize,
@@ -22,7 +22,7 @@ aw::Button::Button (
     setForegroundColor(foregroundColor);
     setAlignment(alignment);
 
-    controller.addMouseButtonPressCallback(
+    controller->addMouseButtonPressCallback(
         [this](int button, int x, int y){this->onClick(button, x, y);}
     );
 
@@ -31,8 +31,8 @@ aw::Button::Button (
 }
 
 aw::Button::Button (
-    ButtonCallback& callback,
-    Controller& controller,
+    const ButtonCallback& callback,
+    Controller* controller,
     const std::string& font,
     const std::string& text,
     float fontSize,
@@ -52,7 +52,7 @@ aw::Button::Button (
     setForegroundColor(foregroundColor);
     setAlignment(alignment);
 
-    controller.addMouseButtonPressCallback(
+    controller->addMouseButtonPressCallback(
         [this](int button, int x, int y){this->onClick(button, x, y);}
     );
 
@@ -173,7 +173,7 @@ const aw::Button::ButtonCallback& aw::Button::getCallback () const {
 
 }
 
-const aw::Controller& aw::Button::getController () const {
+aw::Controller* aw::Button::getController () const {
 
     return m_controller;
 
@@ -203,7 +203,7 @@ sf::Color aw::Button::getForegroundColor () const {
 
 }
 
-void aw::Button::setCallback (Button::ButtonCallback& callback) {
+void aw::Button::setCallback (const Button::ButtonCallback& callback) {
 
     m_callback = callback;
 
@@ -214,6 +214,12 @@ void aw::Button::setFont (const std::shared_ptr<sf::Font>& font) {
     m_font = font;
 
     updateFont();
+
+}
+
+void aw::Button::setFont (const std::string& font) {
+
+    setFont(AssetStore::getFont(font));
 
 }
 
@@ -261,7 +267,7 @@ void aw::Button::setForegroundColor (const sf::Color& color) {
 
     m_foregroundColor = color;
 
-    updateBackgroundColor();
+    updateForegroundColor();
 
 }
 
@@ -423,5 +429,6 @@ void aw::Button::updateBackgroundColor () {
 void aw::Button::updateForegroundColor () {
 
     m_borderElement.setOutlineColor(m_foregroundColor);
+    m_textElement.setFillColor(m_foregroundColor);
 
 }

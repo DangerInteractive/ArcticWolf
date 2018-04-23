@@ -28,9 +28,10 @@ public:
 
     typedef std::function<void()> ButtonCallback;
 
+    Button () = default;
     Button (
-        ButtonCallback&,
-        Controller&,
+        const ButtonCallback&,
+        Controller*,
         std::shared_ptr<sf::Font>,
         const std::string&,
         float fontSize = 32.0,
@@ -40,8 +41,8 @@ public:
         Button::Alignment alignment = Button::Alignment::Center
     );
     Button (
-        ButtonCallback&,
-        Controller&,
+        const ButtonCallback&,
+        Controller*,
         const std::string&,
         const std::string&,
         float fontSize = 32.0,
@@ -68,14 +69,15 @@ public:
     void setAlignment (Button::Alignment);
 
     const ButtonCallback& getCallback () const;
-    const Controller& getController () const;
+    Controller* getController () const;
     std::shared_ptr<sf::Font> getFont () const;
     std::string getText () const;
     sf::Color getBackgroundColor () const;
     sf::Color getForegroundColor () const;
 
-    void setCallback (ButtonCallback&);
+    void setCallback (const ButtonCallback&);
     void setFont (const std::shared_ptr<sf::Font>&);
+    void setFont (const std::string&);
     void setText (const std::string&);
     void setFontSize (float);
     void setPadding (float);
@@ -96,7 +98,7 @@ private:
     void updateForegroundColor ();
 
     ButtonCallback m_callback;
-    Controller& m_controller;
+    Controller* m_controller;
     std::shared_ptr<sf::Font> m_font;
     std::string m_text;
     float m_fontSize = 32.0;
