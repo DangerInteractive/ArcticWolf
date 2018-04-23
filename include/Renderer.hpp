@@ -10,7 +10,7 @@ class Renderer {
 public:
 
     Renderer () = default;
-    virtual ~Renderer () = 0;
+    virtual ~Renderer () = default;
 
     Renderer (Renderer&&) = default;
     Renderer& operator = (Renderer&&) = default;
@@ -18,7 +18,7 @@ public:
     Renderer (const Renderer&) = default;
     Renderer& operator = (const Renderer&) = default;
 
-    virtual void render (Renderable*, double cameraX, double cameraY);
+    virtual void render (Renderable*, double cameraX, double cameraY) = 0;
 
 protected:
 

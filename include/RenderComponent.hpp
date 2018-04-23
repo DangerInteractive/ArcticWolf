@@ -1,13 +1,13 @@
 #ifndef H_AW_RENDERCOMPONENT
 #define H_AW_RENDERCOMPONENT
 
-#include "Component.hpp"
+#include "EntityComponent.hpp"
 #include "PriorityVector.hpp"
 #include "PointerGreater.hpp"
 #include "Renderable.hpp"
 
 namespace aw {
-class RenderComponent : public Component {
+class RenderComponent : public EntityComponent {
 
 public:
 

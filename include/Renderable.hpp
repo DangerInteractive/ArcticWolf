@@ -27,11 +27,9 @@ public:
     Renderable (const Renderable&) = default;
     Renderable& operator = (const Renderable&) = default;
 
-    virtual void render (sf::RenderTarget*);
-
     RenderComponent* getOwner ();
     double getZIndex () const;
-    virtual sf::Drawable* get ();
+    virtual sf::Drawable* get () = 0;
 
     void setOwner (RenderComponent*);
     void setZIndex (double);

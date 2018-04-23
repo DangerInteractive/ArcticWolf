@@ -85,13 +85,13 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/lib/FastNoise/FastNoise.cpp
 
     # game engine
-    ${PROJECT_SOURCE_DIR}/src/Actor.cpp
     ${PROJECT_SOURCE_DIR}/src/AssetStore.cpp
     ${PROJECT_SOURCE_DIR}/src/Button.cpp
-    ${PROJECT_SOURCE_DIR}/src/Component.cpp
     ${PROJECT_SOURCE_DIR}/src/Console.cpp
     ${PROJECT_SOURCE_DIR}/src/ConsoleLogObserver.cpp
     ${PROJECT_SOURCE_DIR}/src/Controller.cpp
+    ${PROJECT_SOURCE_DIR}/src/Entity.cpp
+    ${PROJECT_SOURCE_DIR}/src/EntityComponent.cpp
     ${PROJECT_SOURCE_DIR}/src/File.cpp
     ${PROJECT_SOURCE_DIR}/src/FileLogObserver.cpp
     ${PROJECT_SOURCE_DIR}/src/FunctionLogObserver.cpp
@@ -126,16 +126,17 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/ArcticWolf.hpp
 
     # bundled libraries
+    ${PROJECT_SOURCE_DIR}/lib/args/args.hxx
     ${PROJECT_SOURCE_DIR}/lib/FastNoise/FastNoise.h
 
     # game engine
-    ${PROJECT_SOURCE_DIR}/include/Actor.hpp
     ${PROJECT_SOURCE_DIR}/include/AssetStore.hpp
     ${PROJECT_SOURCE_DIR}/include/Button.hpp
-    ${PROJECT_SOURCE_DIR}/include/Component.hpp
     ${PROJECT_SOURCE_DIR}/include/Console.hpp
     ${PROJECT_SOURCE_DIR}/include/ConsoleLogObserver.hpp
     ${PROJECT_SOURCE_DIR}/include/Controller.hpp
+    ${PROJECT_SOURCE_DIR}/include/Entity.hpp
+    ${PROJECT_SOURCE_DIR}/include/EntityComponent.hpp
     ${PROJECT_SOURCE_DIR}/include/File.hpp
     ${PROJECT_SOURCE_DIR}/include/FileLogObserver.hpp
     ${PROJECT_SOURCE_DIR}/include/FunctionLogObserver.hpp
