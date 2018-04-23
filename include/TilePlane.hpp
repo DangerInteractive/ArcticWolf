@@ -4,6 +4,7 @@
 #include <array>
 #include <memory>
 #include <functional>
+#include "TileSet.hpp"
 
 namespace aw {
 template <unsigned int Width, unsigned int Height, unsigned short TileSize, unsigned short PixelSize = 1>
@@ -11,10 +12,10 @@ class TilePlane {
 
 public:
 
-    typedef std::function <unsigned int(unsigned int, unsigned int)> Initializer;
+    typedef std::function <TileSet::TileStorageType(unsigned int, unsigned int)> Initializer;
 
     TilePlane () = default;
-    explicit TilePlane (unsigned int defaultValue) : m_blocks(defaultValue) {}
+    explicit TilePlane (TileSet::TileStorageType defaultValue) : m_blocks(defaultValue) {}
     ~TilePlane () = default;
 
     TilePlane (TilePlane&&) = default;
@@ -39,7 +40,7 @@ public:
         return PixelSize;
     }
 
-    unsigned int get (unsigned int x, unsigned int y) const {
+    TileSet::TileStorageType get (unsigned int x, unsigned int y) const {
         return m_blocks[Width * y + x];
     }
 
@@ -47,11 +48,19 @@ public:
         return static_cast<unsigned int>(coordinate / (TileSize * PixelSize));
     }
 
-    unsigned int getByCoordinate (double x, double y) const {
+    static constexpr double superdivide (unsigned int offset) {
+        return static_cast<double>(offset) * (TileSize * PixelSize);
+    }
+
+    TileSet::TileStorageType getByCoordinate (double x, double y) const {
         return m_blocks[Width * subdivide(y) + subdivide(x)];
     }
 
-    void set (unsigned int value, unsigned int x, unsigned int y) {
+    TileType* getTileType (unsigned int x, unsigned int y) {
+        return m_tileSet->getTileType(get(x, y));
+    }
+
+    void set (TileSet::TileStorageType value, unsigned int x, unsigned int y) {
         m_blocks[Width * y + x] = value;
     }
 
@@ -65,7 +74,8 @@ public:
 
 private:
 
-    std::unique_ptr<std::array<unsigned int, Width*Height>> m_blocks;
+    std::unique_ptr<std::array<TileSet::TileStorageType, Width*Height>> m_blocks;
+    std::unique_ptr<TileSet> m_tileSet;
 
 };
 }

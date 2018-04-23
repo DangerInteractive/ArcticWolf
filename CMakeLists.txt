@@ -113,6 +113,8 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/SpriteLayer.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteRenderable.cpp
     ${PROJECT_SOURCE_DIR}/src/TileLayer.cpp
+    ${PROJECT_SOURCE_DIR}/src/TileSet.cpp
+    ${PROJECT_SOURCE_DIR}/src/TileType.cpp
     ${PROJECT_SOURCE_DIR}/src/UIElement.cpp
     ${PROJECT_SOURCE_DIR}/src/UILayer.cpp
     ${PROJECT_SOURCE_DIR}/src/UIRenderable.cpp
@@ -165,6 +167,8 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/TileLayer.hpp
     ${PROJECT_SOURCE_DIR}/include/TilePlane.hpp
     ${PROJECT_SOURCE_DIR}/include/TileRenderable.hpp
+    ${PROJECT_SOURCE_DIR}/include/TileSet.hpp
+    ${PROJECT_SOURCE_DIR}/include/TileType.hpp
     ${PROJECT_SOURCE_DIR}/include/UIElement.hpp
     ${PROJECT_SOURCE_DIR}/include/UILayer.hpp
     ${PROJECT_SOURCE_DIR}/include/UIRenderable.hpp

@@ -101,6 +101,7 @@ package "World Subsystem" #eeeeee {
     class aw::World
     class aw::TilePlane
     class aw::TileSet
+    class aw::TileType
     class aw::EntityPlane
 
 }
