@@ -99,7 +99,6 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/GameState.cpp
     ${PROJECT_SOURCE_DIR}/src/GameStateManager.cpp
     ${PROJECT_SOURCE_DIR}/src/GameStateStore.cpp
-    ${PROJECT_SOURCE_DIR}/src/GridLayer.cpp
     ${PROJECT_SOURCE_DIR}/src/Keybinding.cpp
     ${PROJECT_SOURCE_DIR}/src/Layer.cpp
     ${PROJECT_SOURCE_DIR}/src/Log.cpp
@@ -113,6 +112,7 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/SceneStore.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteComponent.cpp
     ${PROJECT_SOURCE_DIR}/src/SpriteLayer.cpp
+    ${PROJECT_SOURCE_DIR}/src/TileLayer.cpp
     ${PROJECT_SOURCE_DIR}/src/UIElement.cpp
     ${PROJECT_SOURCE_DIR}/src/UILayer.cpp
     ${PROJECT_SOURCE_DIR}/src/Window.cpp
@@ -143,7 +143,6 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/GameState.hpp
     ${PROJECT_SOURCE_DIR}/include/GameStateManager.hpp
     ${PROJECT_SOURCE_DIR}/include/GameStateStore.hpp
-    ${PROJECT_SOURCE_DIR}/include/GridLayer.hpp
     ${PROJECT_SOURCE_DIR}/include/Keybinding.hpp
     ${PROJECT_SOURCE_DIR}/include/Layer.hpp
     ${PROJECT_SOURCE_DIR}/include/Log.hpp
@@ -161,6 +160,8 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/SceneStore.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteComponent.hpp
     ${PROJECT_SOURCE_DIR}/include/SpriteLayer.hpp
+    ${PROJECT_SOURCE_DIR}/include/TileLayer.hpp
+    ${PROJECT_SOURCE_DIR}/include/TilePlane.hpp
     ${PROJECT_SOURCE_DIR}/include/UIElement.hpp
     ${PROJECT_SOURCE_DIR}/include/UILayer.hpp
     ${PROJECT_SOURCE_DIR}/include/Window.hpp

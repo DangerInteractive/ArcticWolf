@@ -1,6 +1,7 @@
 #ifndef H_AW_RENDERER
 #define H_AW_RENDERER
 
+#include "Renderable.hpp"
 #include "Layer.hpp"
 
 namespace aw {
@@ -17,7 +18,7 @@ public:
     Renderer (const Renderer&) = default;
     Renderer& operator = (const Renderer&) = default;
 
-    virtual void render (RenderComponent*);
+    virtual void render (Renderable*, double cameraX, double cameraY);
 
 protected:
 
