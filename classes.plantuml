@@ -1,0 +1,275 @@
+@startuml
+
+' -- ArcticWolf Game Engine Class Diagram -- '
+
+package "Asset Management" #eeeeee {
+
+    class aw::AssetStore <<Static>> {
+        - unordered_map<sf::Font> m_fonts;
+        - unordered_map<sf::Image> m_images;
+        - unordered_map<sf::Sound> m_sounds;
+    }
+
+}
+
+package "Game State Subsystem" #eeeeee {
+
+    interface aw::GameState {
+        + void render (double)
+        + void update ()
+    }
+
+    class aw::GameStateManager <<Static>> {
+        - vector<aw::GameState> m_states
+        + void render (double)
+        + void update ()
+    }
+
+    class aw::GameStateStore <<Static>> {
+        - unordered_map<string, aw::GameState> m_states
+    }
+
+}
+
+package "Processing" #eeeeee {
+
+    class aw::GameLoop <<Static>> {
+        - thread m_updateThread
+        + void run ()
+        + void freeze ()
+        + void stop ()
+    }
+
+}
+
+package "Input Handling" #eeeeee {
+
+    class aw::Controller
+    class aw::Keybinding
+
+    enum aw::KeyAction {
+        PRESS
+        RELEASE
+        REPEAT
+    }
+
+    enum aw::KeyType {
+        ...
+    }
+
+}
+
+package "Logging Subsystem" #eeeeee {
+
+    class aw::Log <<static>>
+    class aw::LogObserver
+    class aw::ConsoleLogObserver
+    class aw::FileLogObserver
+    class aw::FunctionLogObserver
+
+    enum aw::LogLevel {
+        UNDEFINED
+        VERBOSE
+        NOTICE
+        WARNING
+        ERROR
+    }
+
+}
+
+package "PCG Subsystem" #eeeeee {
+
+    interface aw::TilePlaneGenerator
+    interface aw::EntitySpawner
+
+}
+
+package "Rendering Subsystem" #eeeeee {
+
+    class aw::SceneStore
+    class aw::Scene
+    interface aw::Layer
+    class aw::TileLayer
+    class aw::SpriteLayer
+    class aw::UILayer
+    interface aw::SpriteComponent
+    interface aw::Renderable
+    class aw::TileRenderable
+    class aw::SpriteRenderable
+    class aw::UIRenderable
+    interface aw::Renderer
+    class aw::TileRenderer
+    class aw::SpriteRenderer
+    class aw::UIRenderer
+
+}
+
+package "World Subsystem" #eeeeee {
+
+    class aw::WorldStore
+    class aw::World
+    class aw::TilePlane
+    class aw::TileSet
+    class aw::EntityPlane
+
+}
+
+package "Entity Subsystem" #eeeeee {
+
+    interface aw::Entity
+    interface aw::EntityComponent
+
+}
+
+package "Entity Control Subsystem" #eeeeee {
+
+    interface aw::ControlComponent
+    class aw::InputControlComponent
+    class aw::NetworkClientControlComponent
+    class aw::NetworkServerControlComponent
+
+}
+
+package "AI Subsystem" #eeeeee {
+
+    interface aw::AIComponent
+    class aw::AIStateMachine
+    interface aw::AIState
+    class aw::AITransition
+    interface aw::Pathfinder
+    class aw::JPSPlusPathfinder
+    class aw::AStarPathfinder
+    interface aw::Hunter
+    class aw::CartesianHunter
+    class aw::RaycastCartesianHunter
+
+}
+
+package "UI Subsystem" #eeeeee {
+
+    interface aw::UIElement
+    interface aw::UIComponent
+
+}
+
+package "Window Management" #eeeeee {
+
+    class aw::Window <<Static>>
+
+}
+
+package "SFML Assets" #bbbbee {
+
+    class sf::Font
+    class sf::Image
+    class sf::Sound
+
+}
+
+package "SFML Rendering" #bbbbee {
+
+    class sf::RenderTarget
+    class sf::RenderWindow
+
+}
+
+package "SFML Drawable" #bbbbee {
+
+    class sf::Drawable
+    class sf::Shape
+    class sf::RectangleShape
+    class sf::CircleShape
+    class sf::ConvexShape
+    class sf::Sprite
+    class sf::Text
+
+}
+
+package "FastNoise" #bbeebb {
+
+    class FastNoise
+
+}
+
+sf::Font --o aw::AssetStore
+sf::Image --o aw::AssetStore
+sf::Sound --o aw::AssetStore
+aw::GameState --* aw::GameStateManager
+aw::GameState --* aw::GameStateStore
+aw::GameStateManager --> aw::GameStateStore
+aw::GameStateManager --> aw::GameState
+aw::GameLoop --> aw::Window
+aw::GameLoop --> aw::GameStateManager
+aw::GameLoop --> aw::Renderer
+aw::Controller --o aw::GameState
+aw::Keybinding --o aw::Controller
+aw::Controller --> aw::Keybinding
+aw::KeyAction --o aw::Keybinding
+aw::KeyType --o aw::Keybinding
+aw::LogLevel --o aw::Log
+aw::GameStateManager --> aw::Log
+aw::GameLoop --> aw::Log
+aw::Window --> aw::Log
+aw::Scene --* aw::SceneStore
+aw::Layer --* aw::Scene
+aw::TileLayer --|> aw::Layer
+aw::SpriteLayer --|> aw::Layer
+aw::UILayer --|> aw::Layer
+sf::RenderWindow --|> sf::RenderTarget
+aw::Renderer --> sf::RenderWindow
+aw::TileRenderer --|> aw::Renderer
+aw::SpriteRenderer --|> aw::Renderer
+aw::UIRenderer --|> aw::Renderer
+aw::TileRenderable --|> aw::Renderable
+aw::SpriteRenderable --|> aw::Renderable
+aw::UIRenderable --|> aw::Renderable
+aw::SpriteComponent --o aw::Renderable
+aw::Layer --o aw::Renderer
+aw::LogObserver --* aw::Log
+aw::ConsoleLogObserver --|> aw::LogObserver
+aw::FileLogObserver --|> aw::LogObserver
+aw::FunctionLogObserver --|> aw::LogObserver
+aw::UIComponent --* aw::UIElement
+aw::UIElement --o aw::UIElement
+aw::UIElement --* aw::UILayer
+sf::Shape --|> sf::Drawable
+sf::Sprite --|> sf::Drawable
+sf::Text --|> sf::Drawable
+sf::RectangleShape --|> sf::Shape
+sf::CircleShape --|> sf::Shape
+sf::ConvexShape --|> sf::Shape
+aw::PriorityVector --o aw::Scene
+aw::PriorityVector --o aw::UILayer
+aw::PriorityVector --o aw::SpriteLayer
+aw::PriorityVector --o aw::SpriteComponent
+sf::Drawable --o aw::Renderable
+aw::AIComponent --o aw::Entity
+aw::AIStateMachine --o aw::AIComponent
+aw::AIState --* aw::AIStateMachine
+aw::AITransition --* aw::AIStateMachine
+aw::Pathfinder --* aw::AIState
+aw::Hunter --* aw::AIState
+aw::JPSPlusPathfinder --|> aw::Pathfinder
+aw::AStarPathfinder --|> aw::Pathfinder
+aw::CartesianHunter --|> aw::Hunter
+aw::RaycastCartesianHunter --|> aw::Hunter
+aw::TileSet --> aw::World
+aw::TilePlane --* aw::World
+aw::EntityPlane --* aw::World
+aw::Entity --* aw::EntityPlane
+aw::World --* aw::WorldStore
+aw::TilePlane --* aw::World
+aw::TileSet --* aw::World
+aw::EntityPlane --* aw::World
+aw::Scene --o aw::World
+aw::TilePlane --o aw::TileRenderable
+aw::Renderer ---> aw::Renderable
+aw::ControlComponent --|> aw::EntityComponent
+aw::InputControlComponent --|> aw::ControlComponent
+aw::NetworkClientControlComponent --|> aw::ControlComponent
+aw::NetworkServerControlComponent --|> aw::ControlComponent
+aw::TilePlaneGenerator --> FastNoise
+aw::TilePlaneGenerator --* aw::TilePlane
+aw::EntitySpawner --* aw::EntityPlane
+
+@enduml
