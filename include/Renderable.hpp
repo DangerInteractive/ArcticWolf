@@ -4,22 +4,15 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-namespace aw { class RenderComponent; }
-
 namespace aw {
 class Renderable {
 
 public:
 
     Renderable () = default;
-    explicit Renderable (RenderComponent*);
     explicit Renderable (double);
-    Renderable (double, RenderComponent*);
-    explicit Renderable (sf::Drawable*);
-    Renderable (sf::Drawable*, RenderComponent*);
-    Renderable (double, sf::Drawable*);
-    Renderable (double, sf::Drawable*, RenderComponent*);
-    virtual ~Renderable () = default;
+    explicit Renderable (double, double);
+    ~Renderable () = default;
 
     Renderable (Renderable&&) = default;
     Renderable& operator = (Renderable&&) = default;
@@ -27,21 +20,22 @@ public:
     Renderable (const Renderable&) = default;
     Renderable& operator = (const Renderable&) = default;
 
-    RenderComponent* getOwner ();
     double getZIndex () const;
-    virtual sf::Drawable* get () = 0;
+    bool zIndexDirty () const;
 
-    void setOwner (RenderComponent*);
+    double getParallax () const;
+
     void setZIndex (double);
-    virtual void set (sf::Drawable*);
+    void resetDirtyZIndex ();
+
+    void setParallax (double);
 
 protected:
 
     double m_zIndex {0.0};
+    bool m_dirtyZIndex {false};
 
-    std::unique_ptr<sf::Drawable> m_drawable {nullptr};
-
-    RenderComponent* m_owner {nullptr};
+    double m_parallax {1.0};
 
 };
 }

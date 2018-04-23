@@ -3,14 +3,18 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "RenderComponent.hpp"
+#include "EntityComponent.hpp"
 
 namespace aw {
-class SpriteComponent : public RenderComponent {
+class SpriteComponent : public EntityComponent {
 
 public:
 
     SpriteComponent () = default;
+    explicit SpriteComponent (sf::Sprite&&);
+    SpriteComponent (Entity*, sf::Sprite&&);
+    explicit SpriteComponent (const sf::Sprite&);
+    SpriteComponent (Entity*, const sf::Sprite&);
     ~SpriteComponent () = default;
 
     SpriteComponent (SpriteComponent&&) = default;
@@ -19,9 +23,11 @@ public:
     SpriteComponent (const SpriteComponent&) = default;
     SpriteComponent& operator = (const SpriteComponent&) = default;
 
+    sf::Sprite* getSprite ();
+
 protected:
 
-    std::shared_ptr<sf::Image> m_texture;
+    sf::Sprite m_sprite;
 
 };
 }

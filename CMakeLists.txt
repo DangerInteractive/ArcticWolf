@@ -106,7 +106,6 @@ list (APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/src/LoopKeybinding.cpp
     ${PROJECT_SOURCE_DIR}/src/ProgressBar.cpp
     ${PROJECT_SOURCE_DIR}/src/Renderable.cpp
-    ${PROJECT_SOURCE_DIR}/src/RenderComponent.cpp
     ${PROJECT_SOURCE_DIR}/src/Renderer.cpp
     ${PROJECT_SOURCE_DIR}/src/Scene.cpp
     ${PROJECT_SOURCE_DIR}/src/SceneStore.cpp
@@ -155,7 +154,6 @@ list (APPEND HEADERS
     ${PROJECT_SOURCE_DIR}/include/PriorityVector.hpp
     ${PROJECT_SOURCE_DIR}/include/ProgressBar.hpp
     ${PROJECT_SOURCE_DIR}/include/Renderable.hpp
-    ${PROJECT_SOURCE_DIR}/include/RenderComponent.hpp
     ${PROJECT_SOURCE_DIR}/include/Renderer.hpp
     ${PROJECT_SOURCE_DIR}/include/Scene.hpp
     ${PROJECT_SOURCE_DIR}/include/SceneStore.hpp

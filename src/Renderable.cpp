@@ -1,47 +1,10 @@
 #include "../include/Renderable.hpp"
-#include "../include/RenderComponent.hpp"
-
-aw::Renderable::Renderable (RenderComponent* owner)
-: m_owner(owner) {}
 
 aw::Renderable::Renderable (double zIndex)
 : m_zIndex(zIndex) {}
 
-aw::Renderable::Renderable (double zIndex, RenderComponent* owner)
-: m_zIndex(zIndex), m_owner(owner) {}
-
-aw::Renderable::Renderable (sf::Drawable* drawable) {
-
-    set(drawable);
-
-}
-
-aw::Renderable::Renderable (sf::Drawable* drawable, RenderComponent* owner)
-: m_owner(owner) {
-
-    set(drawable);
-
-}
-
-aw::Renderable::Renderable (double zIndex, sf::Drawable* drawable)
-: m_zIndex(zIndex) {
-
-    set(drawable);
-
-}
-
-aw::Renderable::Renderable (double zIndex, sf::Drawable* drawable, RenderComponent* owner)
-: m_zIndex(zIndex), m_owner(owner) {
-
-    set(drawable);
-
-}
-
-aw::RenderComponent* aw::Renderable::getOwner () {
-
-    return m_owner;
-
-}
+aw::Renderable::Renderable (double zIndex, double parallax)
+: m_zIndex(zIndex), m_parallax(parallax) {}
 
 double aw::Renderable::getZIndex () const {
 
@@ -49,31 +12,33 @@ double aw::Renderable::getZIndex () const {
 
 }
 
-sf::Drawable* aw::Renderable::get () {
+bool aw::Renderable::zIndexDirty () const {
 
-    return m_drawable.get();
+    return m_dirtyZIndex;
 
 }
 
-void aw::Renderable::setOwner (RenderComponent* owner) {
+double aw::Renderable::getParallax () const {
 
-    m_owner = owner;
+    return m_parallax;
 
 }
 
 void aw::Renderable::setZIndex (double zIndex) {
 
     m_zIndex = zIndex;
-
-    if (m_owner != nullptr) {
-        m_owner->onDirtyZIndex(this);
-    }
+    m_dirtyZIndex = true;
 
 }
 
-void aw::Renderable::set (sf::Drawable* drawable) {
+void aw::Renderable::resetDirtyZIndex () {
 
-    m_drawable.reset();
-    m_drawable = std::unique_ptr<sf::Drawable>(drawable);
+    m_dirtyZIndex = false;
+
+}
+
+void aw::Renderable::setParallax (double parallax) {
+
+    m_parallax = parallax;
 
 }
